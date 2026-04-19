@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BESTFORM GYM | Modern Spor Salonu</title>
+    <meta
+      name="description"
+      content="BESTFORM GYM: Modern ekipmanlar, profesyonel antrenörler ve kişiye özel programlarla formunuza kavuşun. Ücretsiz deneme dersi için hemen başvurun."
+    />
+    <meta
+      name="keywords"
+      content="BESTFORM GYM, spor salonu, fitness, kişisel antrenman, crossfit, pilates, kardio, bodybuilding"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#hero" class="logo">
+          <span class="logo-mark">BF</span>
+          <span class="logo-text">
+            BESTFORM
+            <span>GYM</span>
+          </span>
+        </a>
+
+        <nav class="nav" id="mainNav">
+          <button class="nav-toggle" id="navToggle" aria-label="Menüyü Aç/Kapat">
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="nav-links">
+            <li><a href="#hero">Anasayfa</a></li>
+            <li><a href="#about">Hakkımızda</a></li>
+            <li><a href="#programs">Programlar</a></li>
+            <li><a href="#exercises">Egzersizler</a></li>
+            <li><a href="#coaches">Antrenörler</a></li>
+            <li><a href="#pricing">Üyelik</a></li>
+            <li><a href="#gallery">Galeri</a></li>
+            <li><a href="#contact">İletişim</a></li>
+          </ul>
+          <a href="#contact" class="btn btn-sm btn-outline cta-header">
+            Ücretsiz Deneme
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-inner">
+          <div class="hero-content">
+            <p class="eyebrow">Modern Spor Salonu · Şehrinizde</p>
+            <h1>
+              En iyi <span>formuna</span>
+              <br />
+              birlikte ulaşalım.
+            </h1>
+            <p class="hero-text">
+              BESTFORM GYM; fonksiyonel antrenman, güç antrenmanı ve kardiyo
+              alanlarını tek çatı altında toplayan, tamamen sana özel
+              hazırlanmış programlarla ilerleyen butik bir spor deneyimi sunar.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary btn-glow">
+                Ücretsiz Deneme Dersi Al
+              </a>
+              <a href="#pricing" class="btn btn-ghost">
+                Üyelik Paketlerine Göz At
+              </a>
+            </div>
+            <div class="hero-meta">
+              <div>
+                <span class="meta-label">+350</span>
+                <span class="meta-caption">aktif üye</span>
+              </div>
+              <div>
+                <span class="meta-label">7/24</span>
+                <span class="meta-caption">giriş imkanı*</span>
+              </div>
+              <div>
+                <span class="meta-label">%92</span>
+                <span class="meta-caption">hedefine ulaşma oranı</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <h2>Hedefini Seç</h2>
+            <p>Hedefine göre önerilen programı ve antrenörü gör.</p>
+
+            <form class="hero-form" id="goalForm">
+              <label>
+                Hedefin
+                <select name="goal" id="goalSelect">
+                  <option value="fat-loss">Yağ Yakma & Sıkılaşma</option>
+                  <option value="muscle">Kas Geliştirme</option>
+                  <option value="performance">Performans & Dayanıklılık</option>
+                  <option value="health">Sağlık & Hareketlilik</option>
+                </select>
+              </label>
+
+              <label>
+                Seviye
+                <div class="pill-group">
+                  <button type="button" class="pill active" data-level="beginner">
+                    Yeni Başlıyorum
+                  </button>
+                  <button type="button" class="pill" data-level="intermediate">
+                    Orta Seviye
+                  </button>
+                  <button type="button" class="pill" data-level="advanced">
+                    İleri Seviye
+                  </button>
+                </div>
+              </label>
+
+              <div class="hero-result" id="goalResult">
+                <h3>Önerilen Program</h3>
+                <p>
+                  Yağ yakımını hızlandıran, yüksek tempolu fonksiyonel
+                  antrenmanlar ve kişiye özel beslenme yönlendirmesi.
+                </p>
+                <p class="coach-hint">
+                  Önerilen antrenör: <strong>Elif – Fonksiyonel & HIIT</strong>
+                </p>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                Hedefime Göre Plan Oluştur
+              </button>
+              <p class="form-note">
+                Formu gönderdiğinde ekibimiz 24 saat içinde seninle telefonla
+                iletişime geçer.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section">
+        <div class="container section-inner section-grid">
+          <div class="section-label">BESTFORM GYM</div>
+          <div>
+            <h2>Butik salon konforu, büyük kulüp altyapısı.</h2>
+            <p>
+              En güncel global spor salonu trendlerini takip ederek tasarlanan
+              BESTFORM GYM; açık antrenman alanları, fonksiyonel parkurlar,
+              güçlü ağırlık bölümü ve toplu ders stüdyolarını bir araya getirir.
+            </p>
+            <p>
+              XFit, Fitnox ve SVG3 gibi dünyadaki modern kulüp örneklerini
+              inceleyerek; arayüzden kullanıcı deneyimine kadar, dijitalde de
+              premium bir deneyim sunmayı hedefledik.
+            </p>
+          </div>
+          <div class="about-highlights">
+            <div class="highlight-card">
+              <h3>Akıllı Programlama</h3>
+              <p>
+                Hedefine, seviyene ve sakatlık geçmişine göre antrenman
+                planlaması. Gereksiz hiçbir hareket yok.
+              </p>
+            </div>
+            <div class="highlight-card">
+              <h3>Veri Odaklı Takip</h3>
+              <p>
+                Düzenli ölçüm, performans testleri ve ilerleme raporlarıyla
+                gelişimini sayılarla gör.
+              </p>
+            </div>
+            <div class="highlight-card">
+              <h3>Topluluk Desteği</h3>
+              <p>
+                Grup dersleri, workshoplar ve meydan okumalarla motive kal,
+                yalnız hissetme.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAMS -->
+      <section id="programs" class="section section-alt">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Programlar</div>
+            <h2>Hedefine uygun programı seç.</h2>
+            <p>
+              Tüm programlar, giriş ölçümü ve hedef analizi sonrası kişiye özel
+              adapte edilir.
+            </p>
+          </div>
+
+          <div class="cards-grid">
+            <article class="program-card">
+              <div class="tag tag-orange">Popüler</div>
+              <h3>Fit & Strong</h3>
+              <p>
+                Yağ yakımını destekleyen, fonksiyonel ve güç odaklı karma
+                antrenmanlar. Yoğun iş temposuna uygun, haftada 3 gün.
+              </p>
+              <ul>
+                <li>Fonksiyonel güç antrenmanları</li>
+                <li>HIIT & kardio kombinasyonları</li>
+                <li>Beslenme yönlendirmesi</li>
+                <li>Aylık gelişim raporu</li>
+              </ul>
+              <p class="program-duration">Süre: 12 hafta</p>
+            </article>
+
+            <article class="program-card">
+              <div class="tag">Kas Gelişim</div>
+              <h3>Hypertrophy Pro</h3>
+              <p>
+                Hacim ve güç odaklı, planlı progresif yüklenme modeliyle
+                hazırlanan ileri seviye kas gelişim programı.
+              </p>
+              <ul>
+                <li>Birebir antrenör takibi</li>
+                <li>Split programlama</li>
+                <li>Güç testleri</li>
+                <li>Toparlanma & mobilite çalışmaları</li>
+              </ul>
+              <p class="program-duration">Süre: 16 hafta</p>
+            </article>
+
+            <article class="program-card">
+              <div class="tag tag-green">Yeni Başlayan</div>
+              <h3>Start Smart</h3>
+              <p>
+                Spora sıfırdan, güvenli ve sürdürülebilir şekilde başlamak
+                isteyenler için temel kuvvet ve hareketlilik odaklı program.
+              </p>
+              <ul>
+                <li>Doğru form eğitimi</li>
+                <li>Temel kuvvet hareketleri</li>
+                <li>Duruş ve bel-boyun sağlığı odaklı</li>
+                <li>Kişiye özel tempo</li>
+              </ul>
+              <p class="program-duration">Süre: 8 hafta</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXERCISES -->
+      <section id="exercises" class="section">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Egzersizler</div>
+            <h2>Temel hareketler, doğru form önerileri.</h2>
+            <p>
+              Programlarında sıkça kullanacağımız bazı çok eklemli hareketleri ve
+              dikkat etmen gereken temel noktaları aşağıda görebilirsin.
+            </p>
+          </div>
+
+          <div class="exercise-grid">
+            <article class="exercise-card">
+              <figure class="exercise-media">
+                <img
+                  src="https://images.pexels.com/photos/6551120/pexels-photo-6551120.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Barbell squat egzersizi yapan sporcu"
+                />
+              </figure>
+              <div class="exercise-body">
+                <div class="tag tag-green">Bacak & Kalça</div>
+                <h3>Barbell Squat</h3>
+                <p>
+                  Derinlikten ödün vermeden, belini nötr pozisyonda tutarak tam
+                  gövde aktivasyonu sağlar.
+                </p>
+                <ul>
+                  <li>Topuklar yerde, dizler bilek hizasında</li>
+                  <li>Göğüs açık, core aktif</li>
+                  <li>Ağırlığı kontrollü indir & kaldır</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="exercise-card">
+              <figure class="exercise-media">
+                <img
+                  src="https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Dumbbell bench press yapan sporcu"
+                />
+              </figure>
+              <div class="exercise-body">
+                <div class="tag">Göğüs & Triceps</div>
+                <h3>Dumbbell Bench Press</h3>
+                <p>
+                  Serbest ağırlıkla yapılan bench press, stabilizasyon kaslarını
+                  daha fazla devreye sokar.
+                </p>
+                <ul>
+                  <li>Omuzlar geride, kürek kemikleri sıkışık</li>
+                  <li>Dirsek açısı 45° civarı</li>
+                  <li>Ağırlığı göğüs hattına kontrollü indir</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="exercise-card">
+              <figure class="exercise-media">
+                <img
+                  src="https://images.pexels.com/photos/4164520/pexels-photo-4164520.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Kettlebell swing egzersizi"
+                />
+              </figure>
+              <div class="exercise-body">
+                <div class="tag tag-orange">Fonksiyonel</div>
+                <h3>Kettlebell Swing</h3>
+                <p>
+                  Kalça menteşe hareketini güçlendiren, hem kardiyo hem güç
+                  sağlayan fonksiyonel bir egzersiz.
+                </p>
+                <ul>
+                  <li>Belden değil kalçadan menteşe yap</li>
+                  <li>Kettlebell’i kalçayla hızlandır</li>
+                  <li>Omuzları kasma, kollar gevşek</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="exercise-card">
+              <figure class="exercise-media">
+                <img
+                  src="https://images.pexels.com/photos/7676404/pexels-photo-7676404.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Plank core egzersizi yapan sporcu"
+                />
+              </figure>
+              <div class="exercise-body">
+                <div class="tag">Core</div>
+                <h3>Plank</h3>
+                <p>
+                  Bel ve karın bölgesini güçlendirirken, duruşunu da iyileştiren
+                  izometrik bir core egzersizi.
+                </p>
+                <ul>
+                  <li>Vücudun düz bir çizgi halinde</li>
+                  <li>Kalçayı ne çok kaldır ne çok indir</li>
+                  <li>Nefesini tutma, kontrollü nefes al</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- COACHES -->
+      <section id="coaches" class="section">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Antrenörler</div>
+            <h2>Alanında uzman, ulaşılabilir antrenörler.</h2>
+            <p>
+              BESTFORM ekibi; güç antrenmanı, fonksiyonel fitness, mobilite ve
+              beslenme alanlarında uluslararası sertifikalara sahip
+              profesyonellerden oluşur.
+            </p>
+          </div>
+
+          <div class="cards-grid coaches-grid">
+            <article class="coach-card">
+              <div class="coach-avatar coach-avatar-1"></div>
+              <h3>Elif K.</h3>
+              <p class="coach-role">Fonksiyonel Antrenman & HIIT</p>
+              <p>
+                Yüksek tempolu ama ulaşılabilir antrenmanlarıyla tanınan Elif,
+                ofis çalışanları ve yeni başlayanlarla yoğun şekilde çalışıyor.
+              </p>
+              <ul class="coach-meta">
+                <li>7 yıl deneyim</li>
+                <li>ACE Certified</li>
+              </ul>
+            </article>
+
+            <article class="coach-card">
+              <div class="coach-avatar coach-avatar-2"></div>
+              <h3>Can Y.</h3>
+              <p class="coach-role">Güç & Kas Gelişimi</p>
+              <p>
+                Powerlifting ve hypertrophy odaklı çalışan Can, kontrollü ama
+                iddialı programlarıyla biliniyor.
+              </p>
+              <ul class="coach-meta">
+                <li>8 yıl deneyim</li>
+                <li>NSCA-CPT</li>
+              </ul>
+            </article>
+
+            <article class="coach-card">
+              <div class="coach-avatar coach-avatar-3"></div>
+              <h3>Deniz A.</h3>
+              <p class="coach-role">Mobilite & Denge</p>
+              <p>
+                Sakatlık sonrası dönüş ve hareketlilik odaklı çalışan Deniz,
+                güvenli ve uzun vadeli gelişim için planlar hazırlar.
+              </p>
+              <ul class="coach-meta">
+                <li>Fizyoterapi arka planı</li>
+                <li>FRC Certified</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section id="pricing" class="section section-alt">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Üyelik</div>
+            <h2>Şeffaf fiyatlar, esnek üyelikler.</h2>
+            <p>
+              Tüm paketlerimizde; giriş ölçümü, program planlama ve uygulama
+              eğitimi dahildir. Fiyatlar örnektir, kendi rakamlarınızla
+              güncelleyebilirsiniz.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="pricing-card">
+              <h3>Esnek Üyelik</h3>
+              <p class="price">
+                1.200 <span>₺ / ay</span>
+              </p>
+              <p class="price-note">Taahhütsüz, ay ay yenilemeli.</p>
+              <ul>
+                <li>Haftada 3 gün giriş</li>
+                <li>Giriş ölçümü & program</li>
+                <li>Salon içi antrenör desteği</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline btn-full">
+                Bilgi Al
+              </a>
+            </article>
+
+            <article class="pricing-card pricing-card-featured">
+              <div class="tag tag-orange">Önerilen</div>
+              <h3>12 Aylık Dönüşüm</h3>
+              <p class="price">
+                950 <span>₺ / ay</span>
+              </p>
+              <p class="price-note">
+                Yıllık üyelikte toplamda %20’ye varan avantaj.
+              </p>
+              <ul>
+                <li>Sınırsız giriş</li>
+                <li>3 ayda bir detaylı ölçüm</li>
+                <li>Aylık program güncellemesi</li>
+                <li>1’e 1 görüşme (3 ayda bir)</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary btn-full">
+                Ücretsiz Deneme Planla
+              </a>
+            </article>
+
+            <article class="pricing-card">
+              <h3>PT Paketi</h3>
+              <p class="price">
+                750 <span>₺ / seans</span>
+              </p>
+              <p class="price-note">Min. 8 seanslık paketler halinde.</p>
+              <ul>
+                <li>1’e 1 kişisel antrenman</li>
+                <li>Online takip & raporlama</li>
+                <li>Beslenme danışmanlığı yönlendirmesi</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline btn-full">
+                PT ile Çalış
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY / FACILITIES -->
+      <section id="gallery" class="section">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Salonumuz</div>
+            <h2>Alanlar & ekipmanlar.</h2>
+            <p>
+              Fonksiyonel alan, serbest ağırlık bölümü, kardiyo katı ve grup
+              ders stüdyosu ile tüm ihtiyaçların tek çatı altında.
+            </p>
+          </div>
+
+          <div class="gallery-grid">
+            <figure class="gallery-item gallery-item-1">
+              <figcaption>Fonksiyonel Antrenman Alanı</figcaption>
+            </figure>
+            <figure class="gallery-item gallery-item-2">
+              <figcaption>Serbest Ağırlık Bölümü</figcaption>
+            </figure>
+            <figure class="gallery-item gallery-item-3">
+              <figcaption>Kardiyo Alanı</figcaption>
+            </figure>
+            <figure class="gallery-item gallery-item-4">
+              <figcaption>Grup Ders Stüdyosu</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRAINING EXPERIENCE / VIDEO -->
+      <section id="experience" class="section section-video">
+        <div class="container section-inner section-grid section-grid-video">
+          <div>
+            <div class="section-label">Antrenman Deneyimi</div>
+            <h2>BESTFORM GYM’de bir gün nasıl geçer?</h2>
+            <p>
+              Dinamik ısınma, güç antrenmanı, kardiyo finisher ve esneme…
+              Aşağıdaki videoda üyelerimizin gerçek antrenman akışından kısa bir
+              kesit görebilirsin.
+            </p>
+            <ul class="video-points">
+              <li>Çok eklemli hareketler (squat, deadlift, bench press)</li>
+              <li>Fonksiyonel egzersizler (kettlebell swing, sled push, battle rope)</li>
+              <li>Koşu bandı ve assault bike ile biten kardiyo finisher</li>
+            </ul>
+          </div>
+          <div class="video-wrapper">
+            <div class="video-badge">Gerçek antrenman görüntüleri</div>
+            <video
+              class="gym-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              poster="https://images.pexels.com/photos/7676400/pexels-photo-7676400.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            >
+              <source
+                src="https://videos.pexels.com/video-files/4753951/4753951-uhd_2560_1440_25fps.mp4"
+                type="video/mp4"
+              />
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCHEDULE -->
+      <section id="schedule" class="section section-alt">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Ders Programı</div>
+            <h2>Bu hafta hangi ders var?</h2>
+            <p>
+              Aşağıdaki program demo amaçlıdır. Kendi eğitmen ve saatlerinle
+              kolayca güncelleyebilirsin.
+            </p>
+          </div>
+
+          <div class="schedule-controls" role="tablist" aria-label="Gün seçimi">
+            <button class="pill schedule-tab active" type="button" data-day="pzt" role="tab">
+              Pzt
+            </button>
+            <button class="pill schedule-tab" type="button" data-day="sal" role="tab">
+              Sal
+            </button>
+            <button class="pill schedule-tab" type="button" data-day="car" role="tab">
+              Çar
+            </button>
+            <button class="pill schedule-tab" type="button" data-day="per" role="tab">
+              Per
+            </button>
+            <button class="pill schedule-tab" type="button" data-day="cum" role="tab">
+              Cum
+            </button>
+            <button class="pill schedule-tab" type="button" data-day="cmt" role="tab">
+              Cmt
+            </button>
+          </div>
+
+          <div class="schedule-grid" id="scheduleGrid" aria-live="polite">
+            <article class="schedule-item" data-day="pzt">
+              <div class="schedule-time">07:30</div>
+              <div class="schedule-info">
+                <h3>Mobility Flow</h3>
+                <p>Deniz · Omuz & kalça mobilitesi</p>
+              </div>
+              <div class="schedule-tag">Orta</div>
+            </article>
+            <article class="schedule-item" data-day="pzt">
+              <div class="schedule-time">19:00</div>
+              <div class="schedule-info">
+                <h3>HIIT Circuit</h3>
+                <p>Elif · Yağ yakım odaklı interval</p>
+              </div>
+              <div class="schedule-tag schedule-tag-hot">Yoğun</div>
+            </article>
+
+            <article class="schedule-item" data-day="sal" hidden>
+              <div class="schedule-time">18:30</div>
+              <div class="schedule-info">
+                <h3>Strength Basics</h3>
+                <p>Can · Squat / press teknik</p>
+              </div>
+              <div class="schedule-tag">Yeni</div>
+            </article>
+            <article class="schedule-item" data-day="sal" hidden>
+              <div class="schedule-time">20:00</div>
+              <div class="schedule-info">
+                <h3>Core & Conditioning</h3>
+                <p>Elif · Core + kardiyo finisher</p>
+              </div>
+              <div class="schedule-tag schedule-tag-hot">Yoğun</div>
+            </article>
+
+            <article class="schedule-item" data-day="car" hidden>
+              <div class="schedule-time">07:30</div>
+              <div class="schedule-info">
+                <h3>Run Club</h3>
+                <p>Koç eşliğinde tempo koşusu</p>
+              </div>
+              <div class="schedule-tag">Orta</div>
+            </article>
+            <article class="schedule-item" data-day="car" hidden>
+              <div class="schedule-time">19:30</div>
+              <div class="schedule-info">
+                <h3>Hypertrophy Upper</h3>
+                <p>Can · Üst vücut hacim</p>
+              </div>
+              <div class="schedule-tag">İleri</div>
+            </article>
+
+            <article class="schedule-item" data-day="per" hidden>
+              <div class="schedule-time">18:30</div>
+              <div class="schedule-info">
+                <h3>Pilates</h3>
+                <p>Stüdyo · Denge & core</p>
+              </div>
+              <div class="schedule-tag">Yeni</div>
+            </article>
+            <article class="schedule-item" data-day="per" hidden>
+              <div class="schedule-time">20:00</div>
+              <div class="schedule-info">
+                <h3>Functional Team</h3>
+                <p>Elif · Takım antrenmanı</p>
+              </div>
+              <div class="schedule-tag schedule-tag-hot">Yoğun</div>
+            </article>
+
+            <article class="schedule-item" data-day="cum" hidden>
+              <div class="schedule-time">19:00</div>
+              <div class="schedule-info">
+                <h3>Strength Lower</h3>
+                <p>Can · Alt vücut güç</p>
+              </div>
+              <div class="schedule-tag">Orta</div>
+            </article>
+            <article class="schedule-item" data-day="cum" hidden>
+              <div class="schedule-time">20:15</div>
+              <div class="schedule-info">
+                <h3>Stretch & Recover</h3>
+                <p>Deniz · Esneme & toparlanma</p>
+              </div>
+              <div class="schedule-tag">Kolay</div>
+            </article>
+
+            <article class="schedule-item" data-day="cmt" hidden>
+              <div class="schedule-time">11:00</div>
+              <div class="schedule-info">
+                <h3>Weekend Challenge</h3>
+                <p>Ekiple · Eğlenceli kondisyon</p>
+              </div>
+              <div class="schedule-tag schedule-tag-hot">Yoğun</div>
+            </article>
+            <article class="schedule-item" data-day="cmt" hidden>
+              <div class="schedule-time">12:15</div>
+              <div class="schedule-info">
+                <h3>Mobility Reset</h3>
+                <p>Deniz · Bel-boyun rahatlatma</p>
+              </div>
+              <div class="schedule-tag">Kolay</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section id="reviews" class="section">
+        <div class="container section-inner">
+          <div class="section-header">
+            <div class="section-label">Üye Yorumları</div>
+            <h2>Gerçek üyelerden gerçek sonuçlar.</h2>
+            <p>
+              En iyi spor salonu sitelerinde olduğu gibi, güven oluşturan kısa ve
+              net geri bildirimleri öne çıkarıyoruz.
+            </p>
+          </div>
+
+          <div class="review-grid">
+            <article class="review-card">
+              <div class="review-top">
+                <div class="review-stars" aria-label="5 üzerinden 5">
+                  ★★★★★
+                </div>
+                <div class="review-badge">+12 hafta</div>
+              </div>
+              <p class="review-text">
+                “3 ayda 7 kilo verdim. Program net, takip düzenli. En güzeli
+                kalabalık değil; gerçekten ilgileniyorlar.”
+              </p>
+              <div class="review-person">
+                <div class="review-avatar review-avatar-1" aria-hidden="true"></div>
+                <div>
+                  <strong>Melis</strong>
+                  <span>Yağ yakma · Başlangıç</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-top">
+                <div class="review-stars" aria-label="5 üzerinden 5">
+                  ★★★★★
+                </div>
+                <div class="review-badge">PT</div>
+              </div>
+              <p class="review-text">
+                “Bench ve squat tekniklerim çok düzeldi. Can hocanın planlaması
+                sayesinde sakatlık korkusu olmadan ilerledim.”
+              </p>
+              <div class="review-person">
+                <div class="review-avatar review-avatar-2" aria-hidden="true"></div>
+                <div>
+                  <strong>Emre</strong>
+                  <span>Güç · Orta seviye</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-top">
+                <div class="review-stars" aria-label="5 üzerinden 5">
+                  ★★★★★
+                </div>
+                <div class="review-badge">Mobilite</div>
+              </div>
+              <p class="review-text">
+                “Bel ağrım azaldı, duruşum düzeldi. Deniz hocanın mobilite
+                seansları hayat kurtardı.”
+              </p>
+              <div class="review-person">
+                <div class="review-avatar review-avatar-3" aria-hidden="true"></div>
+                <div>
+                  <strong>Ayşe</strong>
+                  <span>Sağlık · Hareketlilik</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section section-alt">
+        <div class="container section-inner faq-inner">
+          <div class="section-header">
+            <div class="section-label">SSS</div>
+            <h2>Sık sorulan sorular.</h2>
+            <p>
+              Kısa cevaplar. Daha detaylı bilgi için iletişim formunu
+              doldurabilirsin.
+            </p>
+          </div>
+
+          <div class="faq-list" id="faqList">
+            <button class="faq-item" type="button" aria-expanded="false">
+              <span>Ücretsiz deneme dersi nasıl oluyor?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+              <div class="faq-panel">
+                İlk ziyaretinde kısa bir hedef analizi yapıyoruz. Ardından 30–45
+                dakikalık bir tanışma antrenmanı ve temel form kontrolü ile
+                başlıyoruz.
+              </div>
+            </button>
+
+            <button class="faq-item" type="button" aria-expanded="false">
+              <span>Yeni başlayanlar için uygun mu?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+              <div class="faq-panel">
+                Evet. “Start Smart” ile doğru form, temel kuvvet ve hareketlilik
+                üzerine ilerliyoruz. Tempo tamamen sana göre ayarlanır.
+              </div>
+            </button>
+
+            <button class="faq-item" type="button" aria-expanded="false">
+              <span>Programlar kişiye özel mi?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+              <div class="faq-panel">
+                Ölçüm ve hedef analizinden sonra; seviyen, zamanın ve sakatlık
+                geçmişine göre programı uyarlıyoruz. Her ay güncellenir.
+              </div>
+            </button>
+
+            <button class="faq-item" type="button" aria-expanded="false">
+              <span>Kaç gün gelmeliyim?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+              <div class="faq-panel">
+                Yeni başlayanlar için haftada 3 gün idealdir. Hedefine göre 3–5
+                gün arası planlama yapabiliriz.
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA STRIP -->
+      <section class="cta-strip">
+        <div class="container cta-strip-inner">
+          <div>
+            <h2>İlk adımı bugün at.</h2>
+            <p>
+              Kısa bir form doldur, hedefini ve müsait saatlerini bize bırak.
+              Ekibimiz seni arasın, sana en uygun planı birlikte oluşturalım.
+            </p>
+          </div>
+          <a href="#contact" class="btn btn-primary btn-glow">
+            Hemen Formu Doldur
+          </a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section section-alt">
+        <div class="container section-inner contact-grid">
+          <div>
+            <div class="section-label">İletişim</div>
+            <h2>Bize ulaş, randevunu al.</h2>
+            <p>
+              Aşağıdaki formu doldur; ücretsiz deneme dersi, üyelik detayları
+              veya kurumsal paketler için ekibimiz en kısa sürede seni arasın.
+            </p>
+
+            <div class="contact-info">
+              <div>
+                <h3>Salon Adresi</h3>
+                <p>
+                  BESTFORM GYM<br />
+                  Örnek Mahallesi, Spor Caddesi No: 10<br />
+                  (Adres bilgisini kendi konumuna göre güncelleyebilirsin)
+                </p>
+              </div>
+              <div class="contact-columns">
+                <div>
+                  <h3>İletişim</h3>
+                  <p>
+                    Tel: <a href="tel:+905551112233">+90 (555) 111 22 33</a><br />
+                    E-posta:
+                    <a href="mailto:info@bestformgym.com"
+                      >info@bestformgym.com</a
+                    >
+                  </p>
+                </div>
+                <div>
+                  <h3>Çalışma Saatleri</h3>
+                  <p>
+                    Hafta içi: 07:00 – 23:00<br />
+                    Hafta sonu: 09:00 – 21:00
+                  </p>
+                </div>
+              </div>
+
+              <div class="social-links">
+                <a href="#" aria-label="Instagram">
+                  Instagram
+                </a>
+                <a href="#" aria-label="Facebook">
+                  Facebook
+                </a>
+                <a href="#" aria-label="YouTube">
+                  YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <form class="contact-form" id="contactForm">
+              <div class="form-row">
+                <label>
+                  Ad Soyad
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder="Adını ve soyadını yaz"
+                  />
+                </label>
+                <label>
+                  Telefon
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    placeholder="0 5xx xxx xx xx"
+                  />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  E-posta (opsiyonel)
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="E-posta adresin"
+                  />
+                </label>
+                <label>
+                  Tercih Ettiğin Saat
+                  <select name="time">
+                    <option>Hafta içi sabah</option>
+                    <option>Hafta içi akşam</option>
+                    <option>Hafta sonu</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Hedefin
+                <select name="contact-goal">
+                  <option>Yağ yakma & kilo verme</option>
+                  <option>Kas geliştirme & güçlenme</option>
+                  <option>Genel sağlık & hareketlilik</option>
+                  <option>Performans & kondisyon</option>
+                </select>
+              </label>
+
+              <label>
+                Notun (opsiyonel)
+                <textarea
+                  name="message"
+                  rows="4"
+                  placeholder="Özel bir isteğin, sakatlık geçmişin veya sormak istediğin bir şey varsa yazabilirsin."
+                ></textarea>
+              </label>
+
+              <label class="checkbox">
+                <input type="checkbox" name="kvkk" required />
+                <span
+                  >KVKK metnini okudum, kişisel verilerimin iletişim amacıyla
+                  kullanılmasına izin veriyorum.</span
+                >
+              </label>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                Formu Gönder
+              </button>
+
+              <p class="form-note">
+                Form herhangi bir yere kaydedilmez; bu demo yapıda yalnızca
+                tarayıcıda test amaçlı çalışır. Gerçek gönderim için bir
+                backend / e-posta servisi ekleyebilirsin.
+              </p>
+              <p class="form-success" id="contactSuccess" hidden>
+                Teşekkürler! Bilgilerini aldık, en kısa sürede seni arayacağız.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Yukarı çık" hidden>
+      ↑
+    </button>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> BESTFORM GYM. Tüm hakları saklıdır.</p>
+        <p class="footer-meta">
+          Modern tasarım; global spor salonu trendleri referans alınarak
+          hazırlanmıştır.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
+
