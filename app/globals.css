@@ -1,0 +1,812 @@
+:root {
+  --bg: #080a0d;
+  --bg-raised: #11151a;
+  --panel: #171c22;
+  --panel-soft: #20262d;
+  --line: #313942;
+  --text: #f7f3ea;
+  --muted: #b9c0c7;
+  --subtle: #7f8993;
+  --green: #b9f23c;
+  --green-dark: #7fb11d;
+  --coral: #ff6b4a;
+  --cyan: #66d9ef;
+  --ink: #080a0d;
+  --radius: 8px;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.siteHeader {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 16px clamp(18px, 4vw, 52px);
+  background: rgba(8, 10, 13, 0.78);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.brand strong {
+  display: block;
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.brandMark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 2px solid var(--green);
+  color: var(--green);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.nav button,
+.headerCta,
+.menuButton {
+  border: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.nav button {
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.nav button:hover {
+  color: var(--green);
+}
+
+.headerCta,
+.primaryButton,
+.secondaryButton,
+.priceCard button {
+  min-height: 46px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 18px;
+  font-weight: 800;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.headerCta,
+.primaryButton {
+  background: var(--green);
+  color: var(--ink);
+}
+
+.secondaryButton,
+.priceCard button {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--text);
+}
+
+.headerCta:hover,
+.primaryButton:hover,
+.secondaryButton:hover,
+.priceCard button:hover {
+  transform: translateY(-1px);
+}
+
+.menuButton {
+  display: none;
+  width: 44px;
+  height: 44px;
+  justify-self: end;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+}
+
+.menuButton span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 5px auto;
+  background: var(--text);
+}
+
+.hero {
+  position: relative;
+  min-height: 96vh;
+  display: flex;
+  align-items: end;
+  overflow: hidden;
+  padding: 138px clamp(18px, 6vw, 72px) 78px;
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=1800");
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.02);
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 10, 13, 0.96), rgba(8, 10, 13, 0.62) 48%, rgba(8, 10, 13, 0.18)),
+    linear-gradient(0deg, rgba(8, 10, 13, 0.96), rgba(8, 10, 13, 0.12) 52%, rgba(8, 10, 13, 0.48));
+}
+
+.heroContent {
+  position: relative;
+  width: min(760px, 100%);
+}
+
+.kicker,
+.sectionLabel {
+  margin: 0 0 14px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(64px, 14vw, 168px);
+  line-height: 0.82;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.heroLead {
+  max-width: 680px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 23px);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.heroStats span {
+  min-width: 138px;
+  border-left: 2px solid var(--green);
+  padding-left: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.heroStats strong {
+  display: block;
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.scrollCue {
+  position: absolute;
+  right: clamp(18px, 4vw, 52px);
+  bottom: 26px;
+  color: var(--subtle);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  writing-mode: vertical-rl;
+}
+
+.experience,
+.scheduleSection,
+.pricingSection,
+.reviewsSection,
+.faqSection {
+  width: min(var(--max), calc(100% - 36px));
+  margin: 0 auto;
+  padding: clamp(70px, 9vw, 118px) 0;
+}
+
+.sectionIntro {
+  max-width: 760px;
+}
+
+.sectionIntro h2,
+.contentPanel h2 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 68px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.sectionIntro p:not(.sectionLabel),
+.contentPanel > p {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.experienceGrid,
+.programCards,
+.pricingGrid,
+.reviewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.experienceGrid article,
+.infoCard,
+.priceCard,
+.reviewCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  padding: 24px;
+}
+
+.experienceGrid span,
+.infoCard span,
+.priceCard > span {
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.experienceGrid h3,
+.infoCard h3,
+.priceCard h3,
+.scheduleItem h3 {
+  margin: 12px 0 8px;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.experienceGrid p,
+.infoCard p,
+.priceCard p,
+.reviewCard p,
+.scheduleItem p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.splitSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  min-height: 720px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #0b0e12;
+}
+
+.imagePanel {
+  min-height: 540px;
+  background-position: center;
+  background-size: cover;
+}
+
+.trainingImage {
+  background-image:
+    linear-gradient(90deg, rgba(8, 10, 13, 0.1), rgba(8, 10, 13, 0.55)),
+    url("https://images.pexels.com/photos/6456301/pexels-photo-6456301.jpeg?auto=compress&cs=tinysrgb&w=1600");
+}
+
+.contentPanel {
+  align-self: center;
+  padding: clamp(32px, 6vw, 72px);
+}
+
+.goalTabs,
+.dayTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.goalTabs button,
+.dayTabs button {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 14px;
+  background: var(--panel);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.goalTabs button.isActive,
+.dayTabs button.isActive {
+  border-color: var(--green);
+  background: var(--green);
+  color: var(--ink);
+}
+
+.planBox {
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 22px;
+}
+
+.planBox span,
+.planBox dt {
+  color: var(--subtle);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.planBox h3 {
+  margin: 6px 0 12px;
+  font-size: 28px;
+}
+
+.planBox p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.planBox dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 0;
+}
+
+.planBox dd {
+  margin: 4px 0 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.programCards {
+  width: min(var(--max), calc(100% - 36px));
+  margin: 0 auto;
+  padding: clamp(70px, 8vw, 100px) 0;
+}
+
+.infoCard ul {
+  display: grid;
+  gap: 8px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text);
+}
+
+.infoCard li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 9px;
+  background: var(--green);
+}
+
+.scheduleSection,
+.reviewsSection {
+  border-top: 1px solid var(--line);
+}
+
+.scheduleList {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.scheduleItem {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  padding: 18px;
+}
+
+.scheduleItem > strong {
+  color: var(--green);
+  font-size: 24px;
+}
+
+.scheduleItem h3 {
+  margin: 0 0 2px;
+}
+
+.scheduleItem > span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.pricingSection {
+  width: 100%;
+  max-width: none;
+  padding-inline: max(18px, calc((100vw - var(--max)) / 2));
+  background:
+    linear-gradient(135deg, rgba(185, 242, 60, 0.12), transparent 38%),
+    var(--panel);
+}
+
+.priceCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 310px;
+}
+
+.priceCard.featured {
+  border-color: var(--green);
+  background: #1d2519;
+}
+
+.price {
+  color: var(--text) !important;
+  font-size: 42px;
+  font-weight: 900;
+}
+
+.priceCard button {
+  margin-top: auto;
+}
+
+.reviewCard {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reviewCard > p {
+  color: var(--text);
+  font-size: 19px;
+}
+
+.reviewCard strong,
+.reviewCard span {
+  display: block;
+}
+
+.reviewCard span {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.contactSplit {
+  grid-template-columns: minmax(360px, 560px) minmax(0, 1fr);
+  min-height: auto;
+  padding: clamp(60px, 8vw, 100px) max(18px, calc((100vw - var(--max)) / 2));
+}
+
+.contactFacts {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.contactFacts p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.contactFacts strong {
+  display: block;
+  color: var(--text);
+}
+
+.contactFacts a {
+  color: var(--green);
+}
+
+.leadForm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-self: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  padding: clamp(20px, 4vw, 32px);
+}
+
+.leadForm label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.leadForm input,
+.leadForm select {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel-soft);
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+.leadForm input:focus,
+.leadForm select:focus {
+  border-color: var(--green);
+}
+
+.leadForm button,
+.successMessage {
+  grid-column: 1 / -1;
+}
+
+.successMessage {
+  margin: 0;
+  color: var(--green);
+  font-weight: 800;
+}
+
+.faqSection {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: 36px;
+}
+
+.faqList {
+  display: grid;
+  gap: 10px;
+}
+
+.faqItem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 18px;
+  text-align: left;
+}
+
+.faqItem span {
+  font-weight: 900;
+}
+
+.faqItem strong {
+  color: var(--green);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.faqItem p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 28px max(18px, calc((100vw - var(--max)) / 2));
+  border-top: 1px solid var(--line);
+  color: var(--subtle);
+}
+
+.footer span {
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .siteHeader {
+    grid-template-columns: auto auto;
+  }
+
+  .menuButton {
+    display: block;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 18px;
+    right: 18px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(17, 21, 26, 0.98);
+    padding: 8px;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .nav button {
+    text-align: left;
+  }
+
+  .headerCta {
+    display: none;
+  }
+
+  .hero {
+    min-height: 90vh;
+  }
+
+  .experienceGrid,
+  .programCards,
+  .pricingGrid,
+  .reviewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .splitSection,
+  .contactSplit,
+  .faqSection {
+    grid-template-columns: 1fr;
+  }
+
+  .imagePanel {
+    min-height: 420px;
+  }
+
+  .contentPanel {
+    padding-inline: 18px;
+  }
+
+  .contactSplit {
+    padding-inline: 18px;
+  }
+}
+
+@media (max-width: 620px) {
+  .siteHeader {
+    padding: 12px 14px;
+  }
+
+  .hero {
+    min-height: 88vh;
+    padding: 112px 18px 64px;
+  }
+
+  .heroShade {
+    background:
+      linear-gradient(90deg, rgba(8, 10, 13, 0.95), rgba(8, 10, 13, 0.68)),
+      linear-gradient(0deg, rgba(8, 10, 13, 0.96), rgba(8, 10, 13, 0.16) 58%);
+  }
+
+  .hero h1 {
+    font-size: clamp(56px, 18vw, 86px);
+  }
+
+  .heroStats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .heroStats span {
+    min-width: 0;
+    padding-left: 8px;
+    font-size: 12px;
+  }
+
+  .heroStats strong {
+    font-size: 24px;
+  }
+
+  .scrollCue {
+    display: none;
+  }
+
+  .scheduleItem {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .scheduleItem > span {
+    width: max-content;
+  }
+
+  .leadForm {
+    grid-template-columns: 1fr;
+  }
+
+  .planBox dl {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
