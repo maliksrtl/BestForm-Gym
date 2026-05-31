@@ -1,17 +1,18 @@
-import "./globals.css";
+﻿import "./globals.css";
 
 export const metadata = {
-  title: "BESTFORM GYM | Premium Fitness Deneyimi",
+  title: "BESTFORM GYM & Health Center | Adana Spor Salonu",
   description:
-    "BESTFORM GYM; kişiye özel programlar, güçlü antrenör ekibi ve premium salon deneyimiyle ilk dersten itibaren hedefe odaklanan modern fitness kulübü.",
+    "BESTFORM GYM & Health Center; Adana Barajyolu/Sümer'de body building, fitness, pilates ve personal training hizmetleri sunan spor salonu.",
   keywords: [
     "BESTFORM GYM",
-    "spor salonu",
-    "fitness",
-    "kişisel antrenman",
+    "Bestform Gym Adana",
+    "Adana spor salonu",
+    "Seyhan fitness",
+    "Barajyolu spor salonu",
+    "body building",
     "pilates",
-    "HIIT",
-    "gym"
+    "personal training"
   ]
 };
 
