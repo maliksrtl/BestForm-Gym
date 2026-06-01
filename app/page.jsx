@@ -350,7 +350,7 @@ export default function Home() {
             <strong>{profile.location}</strong>
           </p>
           <p className="socialNote">
-            Kısa video ve gönderi akışında öne çıkan çizgi: doğru form, ekipman odağı, yakın hoca yönlendirmesi ve çalışmaya odaklı salon atmosferi.
+            Doğru form, ekipman odağı, yakın hoca yönlendirmesi ve çalışmaya odaklı salon atmosferi.
           </p>
           <div className="profileStats" aria-label="Instagram profil istatistikleri">
             <span>
