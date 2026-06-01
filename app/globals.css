@@ -396,6 +396,7 @@ a {
 }
 
 .socialProfile {
+  min-width: 0;
   display: grid;
   align-content: start;
   gap: 20px;
@@ -410,7 +411,9 @@ a {
 .socialProfile h2 {
   margin: 0;
   color: var(--text);
-  font-size: clamp(36px, 6vw, 74px);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(34px, 3.4vw, 48px);
   line-height: 0.95;
   letter-spacing: 0;
 }
@@ -419,6 +422,7 @@ a {
   margin: 0;
   color: var(--muted);
   font-size: 18px;
+  overflow-wrap: anywhere;
 }
 
 .socialNote {
@@ -426,6 +430,7 @@ a {
   border-left: 2px solid var(--coral);
   padding-left: 12px;
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .socialBio strong {

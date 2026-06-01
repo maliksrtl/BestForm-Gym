@@ -116,12 +116,12 @@ const proofPoints = [
 ];
 
 const hours = [
-  ["Pazartesi", "11:00 - 22:00"],
-  ["Salı", "13:00 - 22:00"],
-  ["Çarşamba", "15:00 - 21:00"],
-  ["Perşembe", "13:00 - 22:00"],
-  ["Cuma", "13:00 - 22:00"],
-  ["Cumartesi", "12:00 - 21:00"],
+  ["Pazartesi", "09:00 - 23:00"],
+  ["Salı", "09:00 - 23:00"],
+  ["Çarşamba", "09:00 - 23:00"],
+  ["Perşembe", "09:00 - 23:00"],
+  ["Cuma", "09:00 - 23:00"],
+  ["Cumartesi", "09:00 - 21:00"],
   ["Pazar", "Kapalı"]
 ];
 
@@ -309,7 +309,6 @@ export default function Home() {
       <section className="servicesSection" id="services">
         <div className="sectionIntro">
           <p className="sectionLabel">Hizmetler</p>
-          <h2>Instagram bio'sundaki dört başlık burada gerçek çalışma akışına dönüyor.</h2>
           <p>
             Bestform'un açık profilinde verdiği hizmet çerçevesi net: body building, fitness, pilates ve personal training.
           </p>
