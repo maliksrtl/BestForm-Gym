@@ -103,25 +103,43 @@ a {
 }
 
 .nav button,
+.mobileAdminLink,
 .headerCta,
+.adminLoginButton,
 .menuButton {
   border: 0;
   color: var(--text);
   background: transparent;
 }
 
-.nav button {
+.nav button,
+.mobileAdminLink {
   min-height: 40px;
   padding: 0 11px;
   color: var(--muted);
   font-size: 14px;
 }
 
-.nav button:hover {
+.nav button:hover,
+.mobileAdminLink:hover {
   color: var(--green);
 }
 
+.mobileAdminLink {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: end;
+  gap: 8px;
+}
+
 .headerCta,
+.adminLoginButton,
 .primaryButton,
 .secondaryButton,
 .ghostButton {
@@ -146,6 +164,24 @@ a {
   color: var(--ink);
 }
 
+.adminLoginButton {
+  width: 46px;
+  padding: 0;
+  border-color: rgba(184, 241, 61, 0.42);
+  background: rgba(184, 241, 61, 0.08);
+  color: var(--green);
+}
+
+.adminIcon {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
 .secondaryButton {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
@@ -159,10 +195,110 @@ a {
 }
 
 .headerCta:hover,
+.adminLoginButton:hover,
 .primaryButton:hover,
 .secondaryButton:hover,
 .ghostButton:hover {
   transform: translateY(-1px);
+}
+
+.modalOpen {
+  overflow: hidden;
+}
+
+.adminLoginOverlay {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(7, 9, 12, 0.78);
+  padding: 18px;
+  backdrop-filter: blur(14px);
+}
+
+.adminLoginModal {
+  position: relative;
+  width: min(440px, 100%);
+  border: 1px solid rgba(184, 241, 61, 0.28);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(184, 241, 61, 0.11), rgba(103, 220, 232, 0.06)),
+    var(--panel);
+  padding: clamp(22px, 5vw, 30px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+}
+
+.adminLoginModal h2 {
+  margin: 0 38px 20px 0;
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.adminModalForm {
+  display: grid;
+  gap: 13px;
+}
+
+.adminModalForm label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.adminModalForm input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #0d1116;
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+.adminModalForm input:focus {
+  border-color: var(--green);
+}
+
+.adminModalForm button[type="submit"] {
+  min-height: 48px;
+  border: 1px solid var(--green);
+  border-radius: var(--radius);
+  background: var(--green);
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.adminModalForm button[type="submit"]:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.adminModalError {
+  margin: 0;
+  border: 1px solid rgba(255, 107, 74, 0.36);
+  border-radius: var(--radius);
+  background: rgba(255, 107, 74, 0.1);
+  color: var(--coral);
+  padding: 10px 12px;
+  font-weight: 800;
 }
 
 .menuButton {
@@ -861,8 +997,16 @@ a {
     text-align: left;
   }
 
-  .headerCta {
+  .headerActions {
     display: none;
+  }
+
+  .mobileAdminLink {
+    display: flex;
+    min-height: 44px;
+    border: 1px solid rgba(184, 241, 61, 0.28);
+    border-radius: var(--radius);
+    background: rgba(184, 241, 61, 0.07);
   }
 
   .servicePanel,
