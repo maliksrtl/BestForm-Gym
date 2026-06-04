@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { calculateEndDate } from "@/src/features/admin/data/adminDashboard";
+import { calculateEndDate, findMembershipPlan } from "@/src/features/admin/data/adminDashboard";
 import { createClient } from "@/src/utils/supabase/server";
 
 export async function POST(request, { params }) {
@@ -8,7 +8,7 @@ export async function POST(request, { params }) {
   const formData = await request.formData();
   const membershipType = String(formData.get("membership_type") || "monthly");
   const startDate = new Date().toISOString().slice(0, 10);
-  const durationMonths = membershipType === "yearly" ? 12 : 1;
+  const durationMonths = findMembershipPlan(membershipType).durationMonths;
   const priceAmount = Number(formData.get("price_amount") || 0);
 
   const supabase = await createClient();

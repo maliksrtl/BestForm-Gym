@@ -1,9 +1,33 @@
 import { createClient } from "@/src/utils/supabase/server";
 
-export const defaultPricing = {
-  monthly_price: 2500,
-  yearly_price: 24000
-};
+export const membershipPlans = Object.freeze([
+  { value: "monthly", label: "1 Ayl\u0131k", durationMonths: 1, priceField: "monthly_price", defaultPrice: 2500 },
+  { value: "quarterly", label: "3 Ayl\u0131k", durationMonths: 3, priceField: "quarterly_price", defaultPrice: 7000 },
+  { value: "semiannual", label: "6 Ayl\u0131k", durationMonths: 6, priceField: "semiannual_price", defaultPrice: 13500 },
+  { value: "yearly", label: "1 Y\u0131ll\u0131k", durationMonths: 12, priceField: "yearly_price", defaultPrice: 24000 }
+]);
+
+export const defaultPricing = membershipPlans.reduce(
+  (pricing, plan) => ({
+    ...pricing,
+    [plan.priceField]: plan.defaultPrice
+  }),
+  {}
+);
+
+export function findMembershipPlan(planValue) {
+  return membershipPlans.find((plan) => plan.value === planValue) ?? membershipPlans[0];
+}
+
+export function getPlanOptions(pricing = defaultPricing) {
+  return membershipPlans.map((plan) => ({
+    value: plan.value,
+    label: plan.label,
+    durationMonths: plan.durationMonths,
+    priceField: plan.priceField,
+    price: Number(pricing?.[plan.priceField] ?? plan.defaultPrice)
+  }));
+}
 
 export function formatCurrency(value) {
   return new Intl.NumberFormat("tr-TR", {
@@ -78,6 +102,7 @@ export async function getAdminDashboardData() {
   return {
     activeMembers,
     expiredMembers,
+    planOptions: getPlanOptions(safePricing),
     members: safeMembers,
     monthRevenue,
     pricing: safePricing,

@@ -9,6 +9,8 @@ create table if not exists public.admin_profiles (
 create table if not exists public.pricing_settings (
   id text primary key default 'default',
   monthly_price integer not null default 2500,
+  quarterly_price integer not null default 7000,
+  semiannual_price integer not null default 13500,
   yearly_price integer not null default 24000,
   updated_at timestamptz not null default now()
 );
@@ -19,7 +21,7 @@ create table if not exists public.members (
   phone text not null,
   email text,
   membership_type text not null default 'monthly'
-    check (membership_type in ('monthly', 'yearly')),
+    check (membership_type in ('monthly', 'quarterly', 'semiannual', 'yearly')),
   membership_start_date date not null,
   membership_duration_months integer not null check (membership_duration_months > 0),
   membership_end_date date not null,
@@ -36,6 +38,19 @@ create table if not exists public.members (
 insert into public.pricing_settings (id, monthly_price, yearly_price)
 values ('default', 2500, 24000)
 on conflict (id) do nothing;
+
+alter table public.pricing_settings
+add column if not exists quarterly_price integer not null default 7000;
+
+alter table public.pricing_settings
+add column if not exists semiannual_price integer not null default 13500;
+
+alter table public.members
+drop constraint if exists members_membership_type_check;
+
+alter table public.members
+add constraint members_membership_type_check
+check (membership_type in ('monthly', 'quarterly', 'semiannual', 'yearly'));
 
 create or replace function public.set_updated_at()
 returns trigger

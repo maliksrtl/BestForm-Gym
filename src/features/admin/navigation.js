@@ -1,11 +1,14 @@
 export const adminRoutes = Object.freeze({
   login: "/admin/login",
-  members: "/admin/members",
-  newMember: "/admin/members/new",
-  memberDetail: (memberId = ":id") => `/admin/members/${memberId}`
+  dashboard: "/admin",
+  members: "/admin#members",
+  expired: "/admin#expired",
+  pricing: "/admin#pricing"
 });
 
 export const adminNavItems = Object.freeze([
-  { label: "Üyeler", href: adminRoutes.members },
-  { label: "Yeni üye", href: adminRoutes.newMember }
+  { label: "Panel", href: adminRoutes.dashboard },
+  { label: "\u00dcyeler", href: adminRoutes.members },
+  { label: "Pasif \u00fcyeler", href: adminRoutes.expired },
+  { label: "Fiyatlar", href: adminRoutes.pricing }
 ]);

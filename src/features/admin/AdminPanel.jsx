@@ -9,10 +9,10 @@ import {
 } from "@/src/features/members/domain/memberStatus";
 
 const defaultPlanOptions = Object.freeze([
-  { value: "monthly", label: "1 Aylık", durationMonths: 1, price: 2500 },
-  { value: "quarterly", label: "3 Aylık", durationMonths: 3, price: 7000 },
-  { value: "semiannual", label: "6 Aylık", durationMonths: 6, price: 13500 },
-  { value: "yearly", label: "1 Yıllık", durationMonths: 12, price: 24000 }
+  { value: "monthly", label: "1 Aylık", durationMonths: 1, priceField: "monthly_price", price: 2500 },
+  { value: "quarterly", label: "3 Aylık", durationMonths: 3, priceField: "quarterly_price", price: 7000 },
+  { value: "semiannual", label: "6 Aylık", durationMonths: 6, priceField: "semiannual_price", price: 13500 },
+  { value: "yearly", label: "1 Yıllık", durationMonths: 12, priceField: "yearly_price", price: 24000 }
 ]);
 
 const paymentStatuses = Object.freeze({
@@ -61,7 +61,7 @@ function getViewFromHash(hash) {
   return adminViewItems.some((item) => item.id === normalizedHash) ? normalizedHash : adminViews.OVERVIEW;
 }
 
-const initialMembers = [
+const mockMembers = [
   {
     id: "BF-1001",
     fullName: "Mert Kaya",
@@ -123,6 +123,22 @@ const initialMembers = [
     notes: "6 aylık paket, yenileme teklifi gönderilecek."
   }
 ];
+
+function toClientMember(member) {
+  return {
+    id: String(member.id),
+    fullName: member.fullName ?? member.full_name ?? "",
+    phone: member.phone ?? "",
+    email: member.email ?? "",
+    plan: member.plan ?? member.membership_type ?? "monthly",
+    membershipStartDate: member.membershipStartDate ?? member.membership_start_date ?? todayValue(),
+    membershipEndDate: member.membershipEndDate ?? member.membership_end_date ?? "",
+    price: Number(member.price ?? member.price_amount ?? 0),
+    paymentStatus: member.paymentStatus ?? member.payment_status ?? paymentStatuses.PAID,
+    notes: member.notes ?? "",
+    cancelled: member.status === memberStatuses.CANCELLED
+  };
+}
 
 function getDefaultForm(plans = defaultPlanOptions) {
   const defaultPlan = plans[0];
@@ -244,11 +260,36 @@ function createRevenueMonths(now) {
   });
 }
 
-export function AdminPanel() {
-  const [activeView, setActiveView] = useState(adminViews.OVERVIEW);
-  const [members, setMembers] = useState(initialMembers);
-  const [plans, setPlans] = useState(defaultPlanOptions);
-  const [form, setForm] = useState(() => getDefaultForm(defaultPlanOptions));
+async function parseApiResponse(response) {
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(result.error || "Islem tamamlanamadi.");
+  }
+
+  return result;
+}
+
+function getPricingPayload(plans) {
+  return plans.reduce(
+    (payload, plan) => ({
+      ...payload,
+      [plan.priceField]: Number(plan.price) || 0
+    }),
+    {}
+  );
+}
+
+export function AdminPanel({
+  initialView = adminViews.OVERVIEW,
+  initialMembers: initialMemberRecords = mockMembers,
+  initialPlans = defaultPlanOptions
+}) {
+  const safeInitialPlans = initialPlans.length > 0 ? initialPlans : defaultPlanOptions;
+  const [activeView, setActiveView] = useState(initialView);
+  const [members, setMembers] = useState(() => initialMemberRecords.map(toClientMember));
+  const [plans, setPlans] = useState(safeInitialPlans);
+  const [form, setForm] = useState(() => getDefaultForm(safeInitialPlans));
   const [editingMemberId, setEditingMemberId] = useState(null);
   const [query, setQuery] = useState("");
   const [planFilter, setPlanFilter] = useState("all");
@@ -256,28 +297,33 @@ export function AdminPanel() {
   const [expiredQuery, setExpiredQuery] = useState("");
   const [expiredPlanFilter, setExpiredPlanFilter] = useState("all");
   const [expiredPaymentFilter, setExpiredPaymentFilter] = useState("all");
+  const [savingAction, setSavingAction] = useState("");
 
   const now = useMemo(() => new Date(), []);
   const previewEndDate = getMembershipEndDate(form.membershipStartDate, form.plan, plans);
   const activeViewTitle = adminViewTitles[activeView];
 
   useEffect(() => {
-    setActiveView(getViewFromHash(window.location.hash));
+    setActiveView(window.location.hash ? getViewFromHash(window.location.hash) : initialView);
 
     function syncHashView() {
-      setActiveView(getViewFromHash(window.location.hash));
+      setActiveView(window.location.hash ? getViewFromHash(window.location.hash) : initialView);
     }
 
     window.addEventListener("hashchange", syncHashView);
 
     return () => window.removeEventListener("hashchange", syncHashView);
-  }, []);
+  }, [initialView]);
 
   const enrichedMembers = useMemo(
     () =>
       members.map((member) => ({
         ...member,
-        status: resolveMembershipStatus({ endDate: member.membershipEndDate, now })
+        status: resolveMembershipStatus({
+          cancelled: member.cancelled,
+          endDate: member.membershipEndDate,
+          now
+        })
       })),
     [members, now]
   );
@@ -389,7 +435,7 @@ export function AdminPanel() {
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const payload = {
@@ -398,21 +444,31 @@ export function AdminPanel() {
       membershipEndDate: getMembershipEndDate(form.membershipStartDate, form.plan, plans)
     };
 
-    if (editingMemberId) {
-      setMembers((current) =>
-        current.map((member) => (member.id === editingMemberId ? { ...member, ...payload } : member))
-      );
-    } else {
-      setMembers((current) => [
-        {
-          id: `BF-${Math.floor(1000 + Math.random() * 9000)}`,
-          ...payload
-        },
-        ...current
-      ]);
-    }
+    try {
+      setSavingAction("member");
 
-    resetForm();
+      const response = await fetch(editingMemberId ? `/api/admin/members/${editingMemberId}` : "/api/admin/members", {
+        method: editingMemberId ? "PATCH" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await parseApiResponse(response);
+      const savedMember = toClientMember(result.member);
+
+      if (editingMemberId) {
+        setMembers((current) =>
+          current.map((member) => (member.id === editingMemberId ? savedMember : member))
+        );
+      } else {
+        setMembers((current) => [savedMember, ...current]);
+      }
+
+      resetForm();
+    } catch (error) {
+      window.alert(error.message);
+    } finally {
+      setSavingAction("");
+    }
   }
 
   function editMember(member) {
@@ -449,27 +505,71 @@ export function AdminPanel() {
     });
   }
 
-  function togglePayment(memberId) {
-    setMembers((current) =>
-      current.map((member) =>
-        member.id === memberId
-          ? {
-              ...member,
-              paymentStatus:
-                member.paymentStatus === paymentStatuses.PAID
-                  ? paymentStatuses.UNPAID
-                  : paymentStatuses.PAID
-            }
-          : member
-      )
-    );
+  async function togglePayment(memberId) {
+    const member = members.find((item) => item.id === memberId);
+
+    if (!member) {
+      return;
+    }
+
+    const payload = {
+      ...member,
+      paymentStatus:
+        member.paymentStatus === paymentStatuses.PAID ? paymentStatuses.UNPAID : paymentStatuses.PAID
+    };
+
+    try {
+      setSavingAction(`payment-${memberId}`);
+
+      const response = await fetch(`/api/admin/members/${memberId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await parseApiResponse(response);
+      const savedMember = toClientMember(result.member);
+
+      setMembers((current) => current.map((item) => (item.id === memberId ? savedMember : item)));
+    } catch (error) {
+      window.alert(error.message);
+    } finally {
+      setSavingAction("");
+    }
   }
 
-  function removeMember(memberId) {
-    setMembers((current) => current.filter((member) => member.id !== memberId));
+  async function removeMember(memberId) {
+    try {
+      setSavingAction(`delete-${memberId}`);
 
-    if (editingMemberId === memberId) {
-      resetForm();
+      const response = await fetch(`/api/admin/members/${memberId}`, { method: "DELETE" });
+      await parseApiResponse(response);
+
+      setMembers((current) => current.filter((member) => member.id !== memberId));
+
+      if (editingMemberId === memberId) {
+        resetForm();
+      }
+    } catch (error) {
+      window.alert(error.message);
+    } finally {
+      setSavingAction("");
+    }
+  }
+
+  async function savePlanPrices(nextPlans = plans) {
+    try {
+      setSavingAction("pricing");
+
+      const response = await fetch("/api/admin/pricing", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(getPricingPayload(nextPlans))
+      });
+      await parseApiResponse(response);
+    } catch (error) {
+      window.alert(error.message);
+    } finally {
+      setSavingAction("");
     }
   }
 
@@ -665,6 +765,7 @@ export function AdminPanel() {
                         <button
                           type="button"
                           className={`paymentToggle ${member.paymentStatus}`}
+                          disabled={savingAction === `payment-${member.id}`}
                           onClick={() => togglePayment(member.id)}
                         >
                           {member.paymentStatus === paymentStatuses.PAID ? "Ödendi" : "Ödenmedi"}
@@ -690,6 +791,7 @@ export function AdminPanel() {
                           <button
                             type="button"
                             className="dangerButton"
+                            disabled={savingAction === `delete-${member.id}`}
                             onClick={() => removeMember(member.id)}
                           >
                             Kaldır
@@ -800,7 +902,7 @@ export function AdminPanel() {
               />
             </label>
             <div className="formActions">
-              <button type="submit" className="adminPrimaryButton">
+              <button type="submit" className="adminPrimaryButton" disabled={savingAction === "member"}>
                 {editingMemberId ? "Güncelle" : "Üye ekle"}
               </button>
               {editingMemberId ? (
@@ -907,6 +1009,7 @@ export function AdminPanel() {
                       min="0"
                       step="100"
                       value={plan.price}
+                      onBlur={() => savePlanPrices()}
                       onChange={(event) => updatePlanPrice(plan.value, event.target.value)}
                     />
                   </label>
