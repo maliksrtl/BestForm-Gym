@@ -37,7 +37,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -982,5 +983,845 @@ a {
   .photoTile:first-child,
   .coachVisual {
     min-height: 300px;
+  }
+}
+
+.adminShell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  background:
+    linear-gradient(135deg, rgba(184, 241, 61, 0.07), transparent 30%),
+    linear-gradient(45deg, rgba(103, 220, 232, 0.05), transparent 36%),
+    #080b0f;
+}
+
+.adminSidebar {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  border-right: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(13, 17, 22, 0.96);
+  padding: 24px 18px;
+}
+
+.adminBrand {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+  font-weight: 900;
+}
+
+.adminBrand span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 2px solid var(--green);
+  color: var(--green);
+}
+
+.adminBrand strong {
+  overflow-wrap: anywhere;
+}
+
+.adminMenu {
+  display: grid;
+  gap: 6px;
+}
+
+.adminMenu button,
+.adminMenu a {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 850;
+  text-align: left;
+}
+
+.adminMenu button:hover,
+.adminMenu button.isSelected,
+.adminMenu a:hover,
+.adminMenu a.isSelected {
+  border-color: rgba(184, 241, 61, 0.35);
+  background: rgba(184, 241, 61, 0.08);
+  color: var(--green);
+}
+
+.adminMiniSummary {
+  border: 1px solid rgba(184, 241, 61, 0.22);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(184, 241, 61, 0.11), rgba(103, 220, 232, 0.06)),
+    rgba(255, 255, 255, 0.04);
+  padding: 12px;
+  text-align: center;
+}
+
+.adminMiniSummary span,
+.adminStatCard span,
+.adminEyebrow,
+.pricingStrip span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adminMiniSummary strong {
+  display: grid;
+  gap: 2px;
+  min-height: 54px;
+  align-content: center;
+  justify-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background: rgba(7, 9, 12, 0.34);
+  padding: 8px;
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.adminMiniSummary small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.adminMiniSummary p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.adminMiniMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.adminWorkspace {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.adminTopbar,
+.adminSectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.adminTopbar {
+  min-height: 76px;
+}
+
+.adminEyebrow {
+  margin: 0 0 8px;
+}
+
+.adminTopbar h1,
+.adminSectionTitle h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.adminSectionTitle h2 {
+  font-size: clamp(22px, 2.2vw, 30px);
+}
+
+.adminHomeLink,
+.adminPrimaryButton,
+.adminGhostButton,
+.tableAction,
+.dangerButton,
+.paymentToggle {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  padding: 0 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.adminHomeLink,
+.adminGhostButton,
+.tableAction {
+  border: 1px solid rgba(184, 241, 61, 0.35);
+  background: rgba(184, 241, 61, 0.07);
+  color: var(--green);
+}
+
+.dangerButton {
+  border: 1px solid rgba(255, 107, 74, 0.5);
+  background: rgba(255, 107, 74, 0.1);
+  color: var(--coral);
+}
+
+.adminPrimaryButton {
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: var(--ink);
+}
+
+.adminStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.adminStatCard,
+.adminRevenuePanel,
+.memberForm,
+.adminPanelBlock,
+.pricingStrip article {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background: rgba(20, 26, 32, 0.92);
+}
+
+.adminStatCard {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.adminStatCard strong,
+.pricingStrip strong {
+  color: var(--text);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1;
+}
+
+.adminStatCard p,
+.adminRevenueTotals span,
+.pricingStrip p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.adminStatCard.isWarning span {
+  color: var(--coral);
+}
+
+.adminRevenuePanel,
+.adminPanelBlock {
+  padding: clamp(18px, 2.6vw, 26px);
+}
+
+.adminRevenueTotals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.adminRevenueTotals span {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.revenueLineChart {
+  min-height: 280px;
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(184, 241, 61, 0.06), transparent 58%),
+    rgba(255, 255, 255, 0.03);
+  padding: 12px;
+}
+
+.revenueLineChart svg {
+  display: block;
+  width: 100%;
+  height: 260px;
+}
+
+.lineChartGrid {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+}
+
+.lineChartStroke {
+  fill: none;
+  stroke: var(--green);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.lineChartDot {
+  fill: var(--bg);
+  stroke: var(--cyan);
+  stroke-width: 4;
+}
+
+.lineChartValue,
+.lineChartLabel {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.lineChartValue {
+  fill: var(--text);
+  font-size: 11px;
+}
+
+.adminGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.memberForm {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+  padding: clamp(18px, 2.4vw, 24px);
+}
+
+.memberForm .adminSectionTitle,
+.formWide,
+.formActions {
+  grid-column: 1 / -1;
+}
+
+.dateRangeField {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+  border: 1px solid rgba(184, 241, 61, 0.18);
+  border-radius: var(--radius);
+  background: rgba(184, 241, 61, 0.045);
+  padding: 12px;
+}
+
+.memberForm label {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.memberForm input,
+.memberForm select,
+.memberForm textarea,
+.memberFilters input,
+.memberFilters select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #0d1116;
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+.memberForm textarea {
+  min-height: 86px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.memberForm input:focus,
+.memberForm select:focus,
+.memberForm textarea:focus,
+.memberFilters input:focus,
+.memberFilters select:focus {
+  border-color: var(--green);
+}
+
+.memberForm input[readonly] {
+  border-color: rgba(103, 220, 232, 0.24);
+  background: rgba(103, 220, 232, 0.06);
+  color: var(--cyan);
+  font-weight: 900;
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.memberFilters {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(112px, 0.62fr) minmax(112px, 0.62fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.memberFilters > * {
+  min-width: 0;
+}
+
+.memberTableWrap {
+  width: 100%;
+  overflow-x: visible;
+  margin-top: 14px;
+}
+
+.memberTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.memberTable th,
+.memberTable td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 7px;
+  text-align: left;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+
+.memberTable th {
+  color: var(--subtle);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.memberTable th:nth-child(1),
+.memberTable td:nth-child(1) {
+  width: 18%;
+}
+
+.memberTable th:nth-child(2),
+.memberTable td:nth-child(2) {
+  width: 12%;
+}
+
+.memberTable th:nth-child(3),
+.memberTable td:nth-child(3) {
+  width: 12%;
+}
+
+.memberTable th:nth-child(4),
+.memberTable td:nth-child(4) {
+  width: 16%;
+}
+
+.memberTable th:nth-child(5),
+.memberTable td:nth-child(5) {
+  width: 13%;
+}
+
+.memberTable th:nth-child(6),
+.memberTable td:nth-child(6) {
+  width: 10%;
+}
+
+.memberTable th:nth-child(7),
+.memberTable td:nth-child(7) {
+  width: 19%;
+}
+
+.memberTable td strong,
+.memberTable td span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.memberTable td span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.memberTable tr.isMuted {
+  opacity: 0.72;
+}
+
+.tableActions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.tableActions .tableAction,
+.tableActions .dangerButton {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 32px;
+  border-radius: 6px;
+  padding: 0 6px;
+  font-size: 11px;
+}
+
+.emptyState {
+  margin: 0;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 18px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.paymentToggle {
+  border: 1px solid transparent;
+  width: 100%;
+  min-width: 0;
+  min-height: 34px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.paymentToggle.paid {
+  border-color: rgba(184, 241, 61, 0.38);
+  background: rgba(184, 241, 61, 0.12);
+  color: var(--green);
+}
+
+.paymentToggle.unpaid {
+  border-color: rgba(255, 107, 74, 0.5);
+  background: rgba(255, 107, 74, 0.11);
+  color: var(--coral);
+}
+
+.remainingPill,
+.statusPill {
+  display: flex;
+  width: 100%;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.remainingPill.active {
+  background: rgba(103, 220, 232, 0.12);
+  color: var(--cyan);
+}
+
+.remainingPill.expired,
+.remainingPill.cancelled {
+  background: rgba(255, 107, 74, 0.1);
+  color: var(--coral);
+}
+
+.statusPill.active {
+  background: rgba(184, 241, 61, 0.14);
+  color: var(--green);
+}
+
+.statusPill.expired,
+.statusPill.cancelled {
+  background: rgba(255, 107, 74, 0.12);
+  color: var(--coral);
+}
+
+.expiredMemberGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.expiredLayout {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.expiredFilters {
+  position: sticky;
+  top: 18px;
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 14px;
+}
+
+.expiredFilters label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.expiredFilters input,
+.expiredFilters select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #0d1116;
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+.expiredFilters input:focus,
+.expiredFilters select:focus {
+  border-color: var(--green);
+}
+
+.expiredMember {
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 107, 74, 0.28);
+  border-radius: var(--radius);
+  background: rgba(255, 107, 74, 0.07);
+  padding: 16px;
+}
+
+.expiredMember strong,
+.expiredMember span {
+  display: block;
+}
+
+.expiredMember span,
+.expiredMember p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.expiredActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pricingStrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.pricingStrip article {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+}
+
+.priceControl {
+  display: grid;
+  gap: 8px;
+}
+
+.priceControl input {
+  width: min(240px, 100%);
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #0d1116;
+  color: var(--text);
+  padding: 0 12px;
+  font-weight: 900;
+  outline: none;
+}
+
+.priceControl input:focus {
+  border-color: var(--green);
+}
+
+@media (max-width: 1180px) {
+  .adminShell {
+    grid-template-columns: 1fr;
+  }
+
+  .adminSidebar {
+    position: static;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) minmax(260px, 1.5fr) minmax(180px, 0.8fr);
+    align-items: center;
+  }
+
+  .adminMiniSummary {
+    margin-top: 0;
+  }
+
+  .adminStatsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adminGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .expiredMemberGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .expiredLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .expiredFilters {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .adminWorkspace {
+    padding: 14px;
+  }
+
+  .adminSidebar,
+  .adminTopbar,
+  .adminSectionTitle {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .adminMenu {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adminStatsGrid,
+  .memberForm,
+  .memberFilters,
+  .expiredLayout,
+  .expiredMemberGrid,
+  .pricingStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .dateRangeField {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .formActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .memberTableWrap {
+    overflow: visible;
+  }
+
+  .memberTable,
+  .memberTable thead,
+  .memberTable tbody,
+  .memberTable tr,
+  .memberTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .memberTable thead {
+    display: none;
+  }
+
+  .memberTable tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .memberTable tr {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 12px;
+  }
+
+  .memberTable tr.isMuted {
+    opacity: 1;
+    border-color: rgba(255, 107, 74, 0.22);
+    background: rgba(255, 107, 74, 0.06);
+  }
+
+  .memberTable td {
+    display: grid;
+    grid-template-columns: 94px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 0;
+  }
+
+  .memberTable td::before {
+    content: attr(data-label);
+    color: var(--subtle);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .memberTable td:last-child {
+    border-bottom: 0;
+  }
+
+  .memberTable td[colspan] {
+    display: block;
+  }
+
+  .memberTable td[colspan]::before {
+    content: none;
+  }
+
+  .tableActions {
+    max-width: 260px;
+  }
+
+  .adminRevenueTotals {
+    justify-content: flex-start;
+  }
+
+  .revenueLineChart {
+    overflow-x: auto;
+  }
+
+  .revenueLineChart svg {
+    min-width: 560px;
   }
 }
