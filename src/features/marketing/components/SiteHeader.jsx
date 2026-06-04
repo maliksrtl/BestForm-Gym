@@ -1,7 +1,6 @@
 import { siteConfig } from "@/src/config/site";
 import { AdminIcon } from "@/src/features/marketing/components/AdminIcon";
 import { navItems } from "@/src/features/marketing/content";
-import { AdminIcon } from "@/src/features/marketing/components/AdminIcon";
 
 export function SiteHeader({ menuOpen, onAdminOpen, onMenuToggle, onNavClick }) {
   return (
