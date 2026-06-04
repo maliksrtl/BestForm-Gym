@@ -4,6 +4,25 @@ import { NextResponse } from "next/server";
 const publicAdminPaths = new Set(["/admin/login", "/api/admin/login", "/api/admin/auth"]);
 
 export async function updateSession(request) {
+  const path = request.nextUrl.pathname;
+  const isAdminPath = path.startsWith("/admin") || path.startsWith("/api/admin");
+  const isPublicAdminPath = publicAdminPaths.has(path);
+
+  if (!isAdminPath) {
+    return NextResponse.next();
+  }
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabasePublishableKey) {
+    if (isPublicAdminPath) {
+      return NextResponse.next();
+    }
+
+    return NextResponse.redirect(new URL("/admin/login?error=config", request.url));
+  }
+
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers
@@ -11,8 +30,8 @@ export async function updateSession(request) {
   });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+    supabaseUrl,
+    supabasePublishableKey,
     {
       cookies: {
         getAll() {
@@ -40,10 +59,6 @@ export async function updateSession(request) {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-
-  const path = request.nextUrl.pathname;
-  const isAdminPath = path.startsWith("/admin") || path.startsWith("/api/admin");
-  const isPublicAdminPath = publicAdminPaths.has(path);
 
   if (isAdminPath && !isPublicAdminPath) {
     if (!user) {
