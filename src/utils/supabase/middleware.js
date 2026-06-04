@@ -4,6 +4,13 @@ import { NextResponse } from "next/server";
 const publicAdminPaths = new Set(["/admin/login", "/api/admin/login", "/api/admin/auth"]);
 
 export async function updateSession(request) {
+  const path = request.nextUrl.pathname;
+  const isAdminPath = path.startsWith("/admin") || path.startsWith("/api/admin");
+
+  if (!isAdminPath) {
+    return NextResponse.next();
+  }
+
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers
@@ -41,11 +48,9 @@ export async function updateSession(request) {
     data: { user }
   } = await supabase.auth.getUser();
 
-  const path = request.nextUrl.pathname;
-  const isAdminPath = path.startsWith("/admin") || path.startsWith("/api/admin");
   const isPublicAdminPath = publicAdminPaths.has(path);
 
-  if (isAdminPath && !isPublicAdminPath) {
+  if (!isPublicAdminPath) {
     if (!user) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
