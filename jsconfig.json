@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "best-form-gym.vercel.app",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
