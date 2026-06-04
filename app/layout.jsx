@@ -1,19 +1,11 @@
-﻿import "./globals.css";
+import "./globals.css";
+
+import { siteConfig } from "@/src/config/site";
 
 export const metadata = {
-  title: "BESTFORM GYM & Health Center | Adana Spor Salonu",
-  description:
-    "BESTFORM GYM & Health Center; Adana Barajyolu/Sümer'de body building, fitness, pilates ve personal training hizmetleri sunan spor salonu.",
-  keywords: [
-    "BESTFORM GYM",
-    "Bestform Gym Adana",
-    "Adana spor salonu",
-    "Seyhan fitness",
-    "Barajyolu spor salonu",
-    "body building",
-    "pilates",
-    "personal training"
-  ]
+  title: siteConfig.metadata.title,
+  description: siteConfig.metadata.description,
+  keywords: siteConfig.metadata.keywords
 };
 
 export default function RootLayout({ children }) {
