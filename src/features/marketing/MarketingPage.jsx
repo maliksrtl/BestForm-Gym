@@ -1,6 +1,7 @@
 "use client";
 
 import { businessSchema } from "@/src/features/marketing/content";
+import { AdminLoginModal } from "@/src/features/marketing/components/AdminLoginModal";
 import { CoachSection } from "@/src/features/marketing/components/CoachSection";
 import { ContactSection } from "@/src/features/marketing/components/ContactSection";
 import { FacilitySection } from "@/src/features/marketing/components/FacilitySection";
@@ -17,9 +18,13 @@ import { useMarketingPage } from "@/src/features/marketing/hooks/useMarketingPag
 export function MarketingPage() {
   const {
     activeService,
+    adminLoginError,
+    adminLoginOpen,
+    closeAdminLogin,
     leadSubmitted,
     menuOpen,
     openFaq,
+    openAdminLogin,
     selectedService,
     scrollToSection,
     setActiveService,
@@ -34,7 +39,13 @@ export function MarketingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
       />
-      <SiteHeader menuOpen={menuOpen} onMenuToggle={setMenuOpen} onNavClick={scrollToSection} />
+      <SiteHeader
+        menuOpen={menuOpen}
+        onAdminOpen={openAdminLogin}
+        onMenuToggle={setMenuOpen}
+        onNavClick={scrollToSection}
+      />
+      <AdminLoginModal errorCode={adminLoginError} open={adminLoginOpen} onClose={closeAdminLogin} />
       <HeroSection onServicesClick={() => scrollToSection("services")} />
       <ServicesSection
         activeService={activeService}

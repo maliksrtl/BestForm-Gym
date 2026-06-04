@@ -1,7 +1,32 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 
+import {
+  adminSessionContract,
+  adminSessionMaxAgeMs,
+  createAdminLoginPath
+} from "@/src/features/admin/auth/adminSession.contract";
+
 const publicAdminPaths = new Set(["/admin/login", "/api/admin/login", "/api/admin/auth"]);
+
+function redirectToLogin(request, error) {
+  return NextResponse.redirect(new URL(createAdminLoginPath(error), request.url));
+}
+
+function clearAdminLoginCookie(response) {
+  response.cookies.set(adminSessionContract.cookieName, "", {
+    maxAge: 0,
+    path: "/"
+  });
+
+  return response;
+}
+
+function hasFreshAdminSession(request) {
+  const loginAt = Number(request.cookies.get(adminSessionContract.cookieName)?.value || 0);
+
+  return Number.isFinite(loginAt) && loginAt > 0 && Date.now() - loginAt <= adminSessionMaxAgeMs;
+}
 
 export async function updateSession(request) {
   const path = request.nextUrl.pathname;
@@ -15,7 +40,7 @@ export async function updateSession(request) {
   const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   if (!supabaseUrl || !supabasePublishableKey) {
-    return NextResponse.redirect(new URL("/admin/login?error=missing-config", request.url));
+    return redirectToLogin(request, "config");
   }
 
   let supabaseResponse = NextResponse.next({
@@ -59,7 +84,12 @@ export async function updateSession(request) {
 
   if (!isPublicAdminPath) {
     if (!user) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return redirectToLogin(request, "login-required");
+    }
+
+    if (!hasFreshAdminSession(request)) {
+      await supabase.auth.signOut();
+      return clearAdminLoginCookie(redirectToLogin(request, "session-expired"));
     }
 
     const { data: adminProfile } = await supabase
@@ -70,7 +100,7 @@ export async function updateSession(request) {
 
     if (!adminProfile) {
       await supabase.auth.signOut();
-      return NextResponse.redirect(new URL("/admin/login?error=unauthorized", request.url));
+      return clearAdminLoginCookie(redirectToLogin(request, "unauthorized"));
     }
   }
 
@@ -82,7 +112,7 @@ export async function updateSession(request) {
       .maybeSingle();
 
     if (adminProfile) {
-      return NextResponse.redirect(new URL("/admin", request.url));
+      return NextResponse.redirect(new URL(adminSessionContract.adminHomePath, request.url));
     }
   }
 

@@ -1,25 +1,53 @@
 import { NextResponse } from "next/server";
 
+import {
+  adminSessionContract,
+  createAdminLoginPath,
+  getAdminSessionCookieOptions
+} from "@/src/features/admin/auth/adminSession.contract";
 import { createClient } from "@/src/utils/supabase/server";
 
 function redirectTo(request, path) {
   return NextResponse.redirect(new URL(path, request.url));
 }
 
+function wantsJson(request) {
+  return request.headers.get("accept")?.includes("application/json");
+}
+
+function errorResponse(request, error, json) {
+  if (json) {
+    return NextResponse.json({ error, ok: false }, { status: 400 });
+  }
+
+  return redirectTo(request, createAdminLoginPath(error));
+}
+
+function withAdminSessionCookie(response) {
+  response.cookies.set(
+    adminSessionContract.cookieName,
+    String(Date.now()),
+    getAdminSessionCookieOptions()
+  );
+
+  return response;
+}
+
 export async function authenticateAdminRequest(request) {
+  const json = wantsJson(request);
   const formData = await request.formData();
   const email = String(formData.get("email") || "").trim();
   const password = String(formData.get("password") || "");
 
   if (!email || !password) {
-    return redirectTo(request, "/admin/login?error=missing");
+    return errorResponse(request, "missing", json);
   }
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error || !data.user) {
-    return redirectTo(request, "/admin/login?error=invalid");
+    return errorResponse(request, "invalid", json);
   }
 
   const { data: adminProfile, error: adminError } = await supabase
@@ -30,8 +58,14 @@ export async function authenticateAdminRequest(request) {
 
   if (adminError || !adminProfile) {
     await supabase.auth.signOut();
-    return redirectTo(request, "/admin/login?error=unauthorized");
+    return errorResponse(request, "unauthorized", json);
   }
 
-  return redirectTo(request, "/admin");
+  if (json) {
+    return withAdminSessionCookie(
+      NextResponse.json({ ok: true, redirectTo: adminSessionContract.adminHomePath })
+    );
+  }
+
+  return withAdminSessionCookie(redirectTo(request, adminSessionContract.adminHomePath));
 }
