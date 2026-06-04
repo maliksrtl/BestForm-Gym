@@ -4,6 +4,20 @@ import { NextResponse } from "next/server";
 const publicAdminPaths = new Set(["/admin/login", "/api/admin/login", "/api/admin/auth"]);
 
 export async function updateSession(request) {
+  const path = request.nextUrl.pathname;
+  const isAdminPath = path.startsWith("/admin") || path.startsWith("/api/admin");
+
+  if (!isAdminPath) {
+    return NextResponse.next();
+  }
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabasePublishableKey) {
+    return NextResponse.redirect(new URL("/admin/login?error=missing-config", request.url));
+  }
+
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers
