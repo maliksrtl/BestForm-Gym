@@ -12,16 +12,16 @@ export const navItems = [
 
 export const profile = {
   username: "@bestformgym",
-  followers: "747",
-  following: "562",
-  posts: "621",
+  followers: "747+",
+  posts: "621+",
+  reviews: "13+",
   bio: ["Body Building", "Fitness", "Pilates", "Personal Training"],
-  location: "Barajyolu ADANA"
+  location: "Sümer Mahallesi / Seyhan / Adana"
 };
 
 export const gallery = [
   {
-    title: "Bestform antrenman alanı",
+    title: "Adana Seyhan'da güçlü antrenman alanı",
     image:
       "https://lh5.googleusercontent.com/p/AF1QipNyXj6v5rEyGgor3JvdIwfEZmZqcY9KmzmwpsbK=w1200-h900-k-no"
   },
@@ -31,7 +31,7 @@ export const gallery = [
       "https://lh5.googleusercontent.com/p/AF1QipP4tzU-fw-J7R5EImsihdJPYaOnZ2iTfiYzkVgg=w1200-h900-k-no"
   },
   {
-    title: "Salon içi ekipman düzeni",
+    title: "Sümer Mahallesi'nde düzenli salon ortamı",
     image:
       "https://lh5.googleusercontent.com/p/AF1QipPRswbgoWxXKtRLxdZnJUBwKM-Xr2of-lDXt4vI=w1200-h900-k-no"
   }
@@ -40,81 +40,81 @@ export const gallery = [
 export const services = [
   {
     label: "Body Building",
-    title: "Serbest ağırlık ve makineyle kas gelişimi",
+    title: "Adana'da kas gelişimi için güçlü ekipman düzeni",
     text:
-      "Belirli kas gruplarına yönelik cihazlar, serbest ağırlıklar ve bölgesel çalışma düzeniyle daha güçlü, daha belirgin bir form hedefleyen üyeler için.",
-    points: ["Bölgesel cihaz çeşitliliği", "Serbest ağırlık alanı", "Teknik form takibi"]
+      "Seyhan Sümer Mahallesi'nde serbest ağırlık, makine ve bölgesel çalışma düzeniyle daha güçlü, daha fit ve daha özgüvenli hissetmek isteyenler için çalışmaya hazır bir salon.",
+    points: ["Serbest ağırlık alanı", "Bölgesel makine çeşitliliği", "Form ve teknik yönlendirme"]
   },
   {
     label: "Fitness",
-    title: "Kilo kontrolü ve kondisyon rutini",
+    title: "Kendini daha iyi hissettiren sürdürülebilir fitness rutini",
     text:
-      "Kilo kontrolü, günlük enerji ve düzenli spor alışkanlığı için seviyene göre ilerleyen, sürdürülebilir salon programları.",
-    points: ["Yeni başlayan desteği", "Kondisyon çalışmaları", "Program düzeni"]
+      "Kilo kontrolü, kondisyon, enerji ve düzenli spor alışkanlığı için seviyene göre ilerleyen programlar. Yeni başlayan da olsan, yeniden spora dönüyor da olsan yanında duran bir ekip var.",
+    points: ["Yeni başlayan desteği", "Kondisyon çalışmaları", "Düzenli program takibi"]
   },
   {
     label: "Pilates",
-    title: "Core, duruş ve esneklik",
+    title: "Duruş, esneklik ve core gücü için pilates",
     text:
-      "Daha kontrollü hareket, güçlü merkez bölge ve günlük yaşamda rahatlık için pilates odaklı çalışma alanı.",
-    points: ["Core kuvveti", "Mobilite", "Duruş farkındalığı"]
+      "Günlük hayatta daha rahat hareket etmek, merkez bölgeyi güçlendirmek ve vücudu daha kontrollü kullanmak isteyenler için sıcak, dikkatli ve motive eden bir pilates deneyimi.",
+    points: ["Core kuvveti", "Mobilite ve esneklik", "Duruş farkındalığı"]
   },
   {
     label: "Personal Training",
-    title: "İsmail Hoca ve ekipten birebir yönlendirme",
+    title: "İsmail Hoca ve ekipten hedefe göre birebir yönlendirme",
     text:
-      "Alet kullanımı, program kurma ve motivasyon tarafında daha yakın ilgi isteyen üyeler için hedefe göre kişisel yönlendirme.",
-    points: ["Alet kullanımı", "Hedefe göre plan", "Antrenman motivasyonu"]
+      "Alet kullanımı, doğru form, motivasyon ve hedefe göre planlama tarafında daha yakın ilgi isteyen üyeler için birebir antrenman desteği.",
+    points: ["Kişisel hedef planı", "Yakın hoca takibi", "Motivasyon ve devamlılık"]
   }
 ];
 
 export const instagramSignals = [
   {
-    title: "Hareket anlatımı",
-    value: "Form önce",
+    title: "Adana'da güçlü konum",
+    value: "Seyhan / Sümer",
     text:
-      "Gönderi ve video dili, antrenmanı gösterişten çok hareketin doğru uygulanması ve hedef kasın hissedilmesi etrafında topluyor."
+      "Barajyolu çevresinde, Sümer Mahallesi'nde ulaşımı kolay bir konumda; işten sonra, okuldan sonra veya gün içinde spora uğramak isteyenler için pratik."
   },
   {
     title: "Ekipman kullanımı",
     value: "Makine + ağırlık",
     text:
-      "İçerik akışındaki salon görüntüleri; makine çeşitliliği, serbest ağırlık alanı ve bölgesel çalışma imkanını öne çıkarıyor."
+      "Salon görselleri ve içerik akışı; makine çeşitliliği, serbest ağırlık alanı ve bölgesel çalışma imkanıyla ciddi antrenman isteyenlere güven veriyor."
   },
   {
     title: "Hoca yaklaşımı",
     value: "Yakın takip",
     text:
-      "Videolardaki bilgilendirici ton, yorumlardaki İsmail Hoca vurgusuyla birleşiyor; yeni başlayanlar için güven hissi veriyor."
+      "İsmail Hoca ve ekibin yönlendirmesi, özellikle yeni başlayanların salona daha rahat alışmasına ve doğru formu öğrenmesine yardımcı oluyor."
   },
   {
     title: "Salon atmosferi",
-    value: "Seviyeli ortam",
+    value: "Rahat ve seviyeli",
     text:
-      "Akıştaki salon havası ve yorumlar, Bestform'u bay-bayan rahatça gelebilecek, kurallı ve çalışmaya odaklı bir mekan olarak konumlandırıyor."
+      "Üyelerin yorumlarında öne çıkan his net: çalışmaya odaklı, saygılı, temiz ve kadın-erkek herkesin rahatça spor yapabileceği bir ortam."
   }
 ];
 
 export const proofPoints = [
   {
-    title: "İsmail Hoca ilgisi",
+    title: "Seyhan'da ulaşımı kolay",
     text:
-      "Yorumlarda en çok tekrar eden değer; motivasyon, yönlendirme ve yeni başlayanlara güven veren yaklaşım."
+      "Sümer Mahallesi ve Barajyolu çevresinde spor salonu arayanlar için merkezi, tarif etmesi kolay ve günlük rutine eklemesi pratik bir konum."
   },
   {
-    title: "Alet çeşitliliği",
+    title: "İlgili hoca desteği",
     text:
-      "Farklı kas grupları için yeterli sayıda cihaz, serbest çalışma alanı ve verimli makine düzeni öne çıkıyor."
+      "Yorumlarda en çok tekrar eden değer; motivasyon, doğru yönlendirme ve yeni başlayanlara güven veren samimi yaklaşım."
   },
   {
-    title: "Seviyeli ortam",
+    title: "Ekipman çeşitliliği",
     text:
-      "Üyeler salonun bay-bayan rahatça gelebileceği, kurallı ve saygılı bir atmosfere sahip olduğunu söylüyor."
+      "Farklı kas grupları için makine, serbest ağırlık ve düzenli çalışma alanı; Adana'da ciddi antrenman yapmak isteyenlere güçlü bir temel sunuyor."
   },
   {
-    title: "Fiyat-performans",
+    title: "Rahat salon kültürü",
     text:
-      "Eski yorumlarda uygun fiyat, geniş mekan ve verilen ilgi birlikte anılıyor; güncel ücret için aramak en doğrusu."
+      "BestForm Gym; sadece ter atılan değil, devam etmek için iyi hissettiren, seviyeli ve çalışmaya motive eden bir spor ortamı oluşturuyor."
   }
 ];
 
@@ -133,19 +133,19 @@ export const reviews = [
     name: "Cafer G.",
     result: "Motivasyon ve ortam",
     text:
-      "Yeterli ekipman, kolay ulaşım, seviyeli ortam ve İsmail Hoca'nın motivasyon veren ilgisi öne çıkıyor."
+      "Yeterli ekipman, kolay ulaşım, seviyeli ortam ve İsmail Hoca'nın motive eden ilgisi BestForm Gym'i öne çıkarıyor."
   },
   {
     name: "Ömer Ö.",
     result: "Hijyen ve ilgi",
     text:
-      "Cihazların sağlamlığı, hocaların ilgisi ve salonun temizliği özellikle olumlu yorumlanmış."
+      "Cihazların sağlamlığı, hocaların ilgisi ve salonun temizliği özellikle olumlu yorumlanmış; bu da yeni gelenlere güven veriyor."
   },
   {
     name: "Emre D.",
     result: "Fiyat-performans",
     text:
-      "Temiz salon, ilgili hoca ve uygun üyelik algısı öne çıkıyor; duş konusu için güncel bilgiyi arayarak teyit etmek iyi olur."
+      "Temiz salon, ilgili ekip ve üyelik karşılığında alınan verim öne çıkıyor. Güncel ücret için salona ulaşmak en doğru yol."
   },
   {
     name: "Farpex",
@@ -163,34 +163,39 @@ export const reviews = [
 
 export const faqs = [
   [
-    "Yeni başlayan biri gelebilir mi?",
-    "Evet. Yorumlarda özellikle alet kullanımı ve motivasyon tarafında hoca ilgisinin güçlü olduğu görülüyor."
+    "BestForm Gym nerede?",
+    "BestForm Gym, Adana'nın Seyhan ilçesinde Sümer Mahallesi Barajyolu çevresinde yer alır. Yol tarifi için iletişim bölümündeki Google Haritalar bağlantısını kullanabilirsin."
+  ],
+  [
+    "Adana'da yeni başlayanlar için uygun bir spor salonu mu?",
+    "Evet. Yeni başlayanlar için alet kullanımı, doğru form ve motivasyon tarafında hoca ilgisi öne çıkıyor."
   ],
   [
     "Kadın ve erkek üyeler için uygun mu?",
-    "Yorumlarda bay-bayan çekinmeden gelebilecek seviyeli bir ortam vurgusu yapılıyor."
+    "Yorumlarda kadın-erkek herkesin rahatça gelebileceği, seviyeli ve çalışmaya odaklı bir ortam vurgusu yapılıyor."
   ],
   [
-    "Güncel ücretler sitede var mı?",
-    "Fiyatlar değişebileceği için kesin üyelik bilgisini telefonla veya salona uğrayarak almak en doğrusu."
+    "Hangi hizmetler var?",
+    "Body building, fitness, pilates ve personal training hizmetleri sunuluyor. Hedefine göre en uygun çalışma düzeni için salonla iletişime geçebilirsin."
   ],
   [
-    "Duş imkanı var mı?",
-    "Bir kullanıcı yorumunda duş olmadığı not edilmiş. Güncel durum değişmiş olabileceği için salona gitmeden arayarak teyit et."
-  ],
-  [
-    "Çalışma saatleri kesin mi?",
-    "Rehber kaynaklardaki güncel saatleri gösteriyoruz; resmi tatil ve özel günler için arayarak teyit edebilirsin."
+    "Güncel üyelik ücretleri sitede var mı?",
+    "Fiyatlar dönemsel olarak değişebileceği için en doğru üyelik bilgisini telefonla veya salona uğrayarak alabilirsin."
   ]
 ];
 
 export const businessSchema = {
   "@context": "https://schema.org",
   "@type": "ExerciseGym",
+  "@id": `${siteConfig.siteUrl}/#exercise-gym`,
   name: siteConfig.name,
+  alternateName: ["BestForm Gym", "Bestform Gym Adana", "BESTFORM GYM Seyhan"],
+  description: siteConfig.metadata.description,
   image: gallery.map((item) => item.image),
-  url: siteConfig.instagramUrl,
+  url: siteConfig.siteUrl,
   telephone: "+90 322 227 13 90",
+  priceRange: "₺₺",
+  hasMap: siteConfig.mapUrl,
   address: {
     "@type": "PostalAddress",
     streetAddress: "Sümer, 69061. Sk.",
@@ -199,6 +204,12 @@ export const businessSchema = {
     postalCode: "01140",
     addressCountry: "TR"
   },
+  areaServed: [
+    { "@type": "City", name: "Adana" },
+    { "@type": "AdministrativeArea", name: "Seyhan" },
+    { "@type": "Place", name: "Sümer Mahallesi" },
+    { "@type": "Place", name: "Barajyolu" }
+  ],
   sameAs: [siteConfig.instagramUrl],
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Monday", opens: "09:00", closes: "23:00" },

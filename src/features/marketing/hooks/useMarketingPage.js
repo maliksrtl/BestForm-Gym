@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { siteConfig } from "@/src/config/site";
 import { services } from "@/src/features/marketing/content";
 
 export function useMarketingPage() {
@@ -35,6 +36,17 @@ export function useMarketingPage() {
 
   const submitLead = (event) => {
     event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const message = [
+      "Merhaba BestForm Gym, randevu talebi oluşturmak istiyorum.",
+      `Ad soyad: ${formData.get("name") || "-"}`,
+      `Telefon: ${formData.get("phone") || "-"}`,
+      `İlgi alanı: ${formData.get("goal") || "-"}`,
+      `Uygun zaman: ${formData.get("time") || "-"}`
+    ].join("\n");
+
+    window.open(`${siteConfig.whatsappUrl}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
     setLeadSubmitted(true);
   };
 

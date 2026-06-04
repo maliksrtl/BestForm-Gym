@@ -10,8 +10,8 @@ export function HeroSection({ onServicesClick }) {
         <p className="kicker">{siteConfig.locationLabel}</p>
         <h1>BESTFORM GYM</h1>
         <p className="heroLead">
-          Body building, fitness, pilates ve personal training için ulaşımı kolay, ekipman çeşitliliği güçlü, hoca
-          ilgisiyle öne çıkan Adana spor salonu.
+          Adana Seyhan Sümer Mahallesi'nde body building, fitness, pilates ve personal training için ulaşımı kolay,
+          enerjisi yüksek, hoca ilgisiyle sevilen spor salonu.
         </p>
         <div className="heroActions">
           <a className="primaryButton" href={siteConfig.phoneHref}>
@@ -34,12 +34,12 @@ export function HeroSection({ onServicesClick }) {
             Instagram gönderisi
           </span>
           <span>
-            <strong>4,8/5</strong>
-            rehber puanı
+            <strong>Seyhan</strong>
+            Sümer Mahallesi
           </span>
           <span>
-            <strong>13+</strong>
-            detaylı yorum
+            <strong>4</strong>
+            ana hizmet
           </span>
         </div>
       </div>

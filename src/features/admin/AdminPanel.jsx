@@ -298,6 +298,7 @@ export function AdminPanel({
   const [expiredPlanFilter, setExpiredPlanFilter] = useState("all");
   const [expiredPaymentFilter, setExpiredPaymentFilter] = useState("all");
   const [savingAction, setSavingAction] = useState("");
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
 
   const now = useMemo(() => new Date(), []);
   const previewEndDate = getMembershipEndDate(form.membershipStartDate, form.plan, plans);
@@ -348,6 +349,46 @@ export function AdminPanel({
   const expiredMembers = enrichedMembers.filter((member) => member.status === memberStatuses.EXPIRED);
   const paidMembers = enrichedMembers.filter((member) => member.paymentStatus === paymentStatuses.PAID);
   const unpaidMembers = enrichedMembers.filter((member) => member.paymentStatus === paymentStatuses.UNPAID);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("Notification" in window)) {
+      return;
+    }
+
+    setNotificationsEnabled(
+      window.Notification.permission === "granted" &&
+        window.localStorage.getItem("bestformAdminNotifications") === "enabled"
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!notificationsEnabled || typeof window === "undefined" || !("Notification" in window)) {
+      return;
+    }
+
+    if (window.Notification.permission !== "granted") {
+      return;
+    }
+
+    const expiredIds = expiredMembers.map((member) => member.id).sort().join("-");
+    const unpaidIds = unpaidMembers.map((member) => member.id).sort().join("-");
+
+    if (!expiredIds && !unpaidIds) {
+      return;
+    }
+
+    const notificationKey = `bestform-admin-${todayValue()}-${expiredIds}-${unpaidIds}`;
+
+    if (window.localStorage.getItem(notificationKey)) {
+      return;
+    }
+
+    window.localStorage.setItem(notificationKey, "sent");
+
+    new window.Notification("BestForm Gym üye takibi", {
+      body: `${expiredMembers.length} süresi biten, ${unpaidMembers.length} ödeme bekleyen üye var.`
+    });
+  }, [expiredMembers, notificationsEnabled, unpaidMembers]);
 
   const filteredExpiredMembers = useMemo(() => {
     const normalizedQuery = expiredQuery.trim().toLocaleLowerCase("tr-TR");
@@ -590,6 +631,27 @@ export function AdminPanel({
     setForm((current) => (current.plan === planValue ? { ...current, price: sanitizedPrice } : current));
   }
 
+  async function enableNotifications() {
+    if (typeof window === "undefined" || !("Notification" in window)) {
+      window.alert("Bu tarayıcı masaüstü bildirimlerini desteklemiyor.");
+      return;
+    }
+
+    const permission = await window.Notification.requestPermission();
+
+    if (permission !== "granted") {
+      window.alert("Bildirim izni verilmedi.");
+      return;
+    }
+
+    window.localStorage.setItem("bestformAdminNotifications", "enabled");
+    setNotificationsEnabled(true);
+
+    new window.Notification("BestForm Gym bildirimleri açık", {
+      body: "Süresi biten veya ödemesi bekleyen üyeler için panel açıkken bildirim alacaksın."
+    });
+  }
+
   return (
     <main className="adminShell">
       <aside className="adminSidebar" aria-label="Admin menüsü">
@@ -631,9 +693,19 @@ export function AdminPanel({
             <p className="adminEyebrow">{activeViewTitle.eyebrow}</p>
             <h1>{activeViewTitle.title}</h1>
           </div>
-          <a className="adminHomeLink" href="/">
-            Siteye dön
-          </a>
+          <div className="adminTopbarActions">
+            <button
+              type="button"
+              className="adminGhostButton"
+              disabled={notificationsEnabled}
+              onClick={enableNotifications}
+            >
+              {notificationsEnabled ? "Bildirimler açık" : "Bildirimleri aç"}
+            </button>
+            <a className="adminHomeLink" href="/">
+              Siteye dön
+            </a>
+          </div>
         </header>
 
         {activeView === adminViews.OVERVIEW ? (

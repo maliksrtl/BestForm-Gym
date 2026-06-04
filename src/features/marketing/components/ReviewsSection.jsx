@@ -5,7 +5,7 @@ export function ReviewsSection() {
     <section className="reviewsSection" id="reviews">
       <div className="sectionIntro">
         <p className="sectionLabel">Üye yorumları</p>
-        <h2>Üyelerin en çok anlattığı şeyler: İsmail Hoca, ekipman, temizlik ve rahat çalışma ortamı.</h2>
+        <h2>Adana'da spor salonu arayanların dikkat ettiği şeyler burada: ilgi, ekipman, temizlik ve güven.</h2>
       </div>
       <div className="reviewGrid">
         {reviews.map((review) => (

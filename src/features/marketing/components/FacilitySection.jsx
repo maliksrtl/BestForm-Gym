@@ -5,10 +5,10 @@ export function FacilitySection() {
     <section className="facilitySection" id="facility">
       <div className="sectionIntro">
         <p className="sectionLabel">Salon</p>
-        <h2>Fotoğraflar ve yorumlar aynı şeyi söylüyor: makine çeşitliliği güçlü, ortam net.</h2>
+        <h2>Seyhan Sümer Mahallesi'nde ekipmanı güçlü, ortamı samimi, çalışması keyifli spor salonu.</h2>
         <p>
-          Salon görsellerinde ağırlık ve makine alanı öne çıkarken, üyeler ekipman çeşitliliğini ve rahat çalışma
-          düzenini tekrar tekrar vurguluyor.
+          BestForm Gym'de amaç sadece üyelik açmak değil; salona gelen kişinin kendini rahat hissetmesi, doğru
+          çalışması ve sporu hayatına gerçekten ekleyebilmesi.
         </p>
       </div>
 

@@ -5,9 +5,10 @@ export function ServicesSection({ activeService, selectedService, onServiceSelec
     <section className="servicesSection" id="services">
       <div className="sectionIntro">
         <p className="sectionLabel">Hizmetler</p>
+        <h2>Adana'da sporu ertelemeyi bıraktıran, hedefe göre çalışan bir salon.</h2>
         <p>
-          Bestform'un açık profilinde verdiği hizmet çerçevesi net: body building, fitness, pilates ve personal
-          training.
+          BestForm Gym; Seyhan Sümer Mahallesi'nde fitness, body building, pilates ve personal training için hem
+          ciddi antrenman yapmak isteyenlere hem de spora yeni başlayanlara sıcak bir başlangıç sunar.
         </p>
       </div>
 

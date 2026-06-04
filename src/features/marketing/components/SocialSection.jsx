@@ -20,12 +20,12 @@ export function SocialSection() {
             takipçi
           </span>
           <span>
-            <strong>{profile.following}</strong>
-            takip
-          </span>
-          <span>
             <strong>{profile.posts}</strong>
             gönderi
+          </span>
+          <span>
+            <strong>{profile.reviews}</strong>
+            toplam yorum
           </span>
         </div>
         <a className="ghostButton" href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
