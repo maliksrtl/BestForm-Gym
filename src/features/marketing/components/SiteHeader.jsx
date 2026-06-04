@@ -1,5 +1,6 @@
 import { siteConfig } from "@/src/config/site";
 import { navItems } from "@/src/features/marketing/content";
+import { AdminIcon } from "@/src/features/marketing/components/AdminIcon";
 
 export function SiteHeader({ menuOpen, onMenuToggle, onNavClick }) {
   return (
@@ -29,11 +30,21 @@ export function SiteHeader({ menuOpen, onMenuToggle, onNavClick }) {
             {label}
           </button>
         ))}
+        <a className="mobileAdminLink" href="/admin/login" aria-label="Admin paneline git" title="Admin paneli">
+          <AdminIcon />
+          <span className="srOnly">Admin paneli</span>
+        </a>
       </nav>
 
-      <a className="headerCta" href={siteConfig.phoneHref}>
-        Ara
-      </a>
+      <div className="headerActions">
+        <a className="adminLoginButton" href="/admin/login" aria-label="Admin paneline git" title="Admin paneli">
+          <AdminIcon />
+          <span className="srOnly">Admin paneli</span>
+        </a>
+        <a className="headerCta" href={siteConfig.phoneHref}>
+          Ara
+        </a>
+      </div>
     </header>
   );
 }

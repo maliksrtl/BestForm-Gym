@@ -772,8 +772,9 @@ export function AdminPanel({
                         </button>
                       </td>
                       <td data-label="Tarih">
-                        <strong>{formatDate(member.membershipStartDate)}</strong>
-                        <span>{formatDate(member.membershipEndDate)}</span>
+                        <strong className="dateRangeText">
+                          {formatDate(member.membershipStartDate)} - {formatDate(member.membershipEndDate)}
+                        </strong>
                       </td>
                       <td data-label="Kalan">
                         <span className={`remainingPill ${member.status}`}>
