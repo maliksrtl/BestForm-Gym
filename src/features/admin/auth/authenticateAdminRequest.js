@@ -5,6 +5,7 @@ import {
   createAdminLoginPath,
   getAdminSessionCookieOptions
 } from "@/src/features/admin/auth/adminSession.contract";
+import { hasSupabaseConfig } from "@/src/utils/supabase/config";
 import { createClient } from "@/src/utils/supabase/server";
 
 function redirectTo(request, path) {
@@ -43,7 +44,7 @@ export async function authenticateAdminRequest(request) {
     return errorResponse(request, "missing", json);
   }
 
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+  if (!hasSupabaseConfig()) {
     return errorResponse(request, "config", json);
   }
 
