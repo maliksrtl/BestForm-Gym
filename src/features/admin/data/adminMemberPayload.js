@@ -24,6 +24,10 @@ export async function getAdminMemberRequestPayload(request) {
       price_amount: formData.get("price_amount"),
       paymentStatus: formData.get("payment_status"),
       payment_status: formData.get("payment_status"),
+      profileImagePath: formData.get("profile_image_path"),
+      profile_image_path: formData.get("profile_image_path"),
+      profileImageUrl: formData.get("profile_image_url"),
+      profile_image_url: formData.get("profile_image_url"),
       notes: formData.get("notes")
     }
   };
@@ -47,6 +51,8 @@ export function toAdminMemberPayload(input) {
     price_amount: Number(input.price ?? input.price_amount ?? 0),
     payment_status: String(input.paymentStatus ?? input.payment_status ?? "paid"),
     status: String(input.status ?? "active"),
+    profile_image_path: String(input.profileImagePath ?? input.profile_image_path ?? "").trim() || null,
+    profile_image_url: String(input.profileImageUrl ?? input.profile_image_url ?? "").trim() || null,
     notes: String(input.notes ?? "").trim() || null
   };
 }

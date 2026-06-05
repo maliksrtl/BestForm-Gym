@@ -1654,6 +1654,38 @@ canvas {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
+}
+
+.memberFormStatus {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.memberFormStatus.info {
+  border-color: rgba(103, 220, 232, 0.28);
+  background: rgba(103, 220, 232, 0.08);
+  color: var(--cyan);
+}
+
+.memberFormStatus.success {
+  border-color: rgba(184, 241, 61, 0.3);
+  background: rgba(184, 241, 61, 0.09);
+  color: var(--green);
+}
+
+.memberFormStatus.error {
+  border-color: rgba(255, 107, 74, 0.28);
+  background: rgba(255, 107, 74, 0.09);
+  color: var(--coral);
 }
 
 .memberFilters {
@@ -1741,6 +1773,164 @@ canvas {
 .memberTable td span {
   color: var(--muted);
   font-size: 12px;
+}
+
+.memberIdentity {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.profileAvatarButton {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(184, 241, 61, 0.35);
+  border-radius: 50%;
+  background: rgba(184, 241, 61, 0.12);
+  color: var(--green);
+  padding: 0;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.profileAvatarButton.hasImage {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--bg-soft);
+}
+
+.profileAvatarButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileAvatarButton:not(.hasImage) {
+  cursor: default;
+}
+
+.profileImageField {
+  border: 1px dashed rgba(184, 241, 61, 0.34);
+  border-radius: var(--radius);
+  background: rgba(184, 241, 61, 0.045);
+  padding: 12px;
+}
+
+.profileImageField input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.profileImageDropzone {
+  min-height: 74px;
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  border: 1px solid rgba(184, 241, 61, 0.34);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(184, 241, 61, 0.11), rgba(103, 220, 232, 0.06)),
+    rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.profileImageDropzone:hover {
+  border-color: var(--green);
+  background:
+    linear-gradient(135deg, rgba(184, 241, 61, 0.17), rgba(103, 220, 232, 0.08)),
+    rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.profileImageField:focus-within .profileImageDropzone {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(184, 241, 61, 0.12);
+}
+
+.profileImageDropzone strong {
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.profileImageDropzone small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.profileImageHint,
+.profileImageError {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.profileImageError {
+  color: var(--coral);
+}
+
+.profileImagePreview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.profileImagePreview img {
+  width: 78px;
+  height: 78px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.profileImageOverlay {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(7, 9, 12, 0.82);
+  padding: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.profileImageModal {
+  position: relative;
+  width: min(420px, 100%);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  border: 1px solid rgba(184, 241, 61, 0.28);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 18px;
+}
+
+.profileImageModal img {
+  width: min(320px, 100%);
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.profileImageModal strong {
+  color: var(--text);
 }
 
 .dateRangeText {
@@ -1836,8 +2026,7 @@ canvas {
 
 .expiredMemberGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
   margin-top: 18px;
 }
 
@@ -1886,32 +2075,55 @@ canvas {
 }
 
 .expiredMember {
-  min-height: 210px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  justify-content: space-between;
-  border: 1px solid rgba(255, 107, 74, 0.28);
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(210px, 1.4fr) repeat(4, minmax(94px, 0.72fr)) minmax(142px, auto);
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(255, 107, 74, 0.22);
   border-radius: var(--radius);
-  background: rgba(255, 107, 74, 0.07);
-  padding: 16px;
+  background:
+    linear-gradient(90deg, rgba(255, 107, 74, 0.08), transparent 44%),
+    rgba(255, 255, 255, 0.035);
+  padding: 12px;
 }
 
-.expiredMember strong,
-.expiredMember span {
-  display: block;
+.expiredMemberPerson,
+.expiredMemberMeta {
+  min-width: 0;
 }
 
-.expiredMember span,
-.expiredMember p {
-  margin: 0;
-  color: var(--muted);
+.expiredMemberMeta {
+  display: grid;
+  gap: 2px;
+}
+
+.expiredMemberMeta span {
+  color: var(--subtle);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.expiredMemberMeta strong {
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .expiredActions {
-  display: flex;
-  flex-wrap: wrap;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+}
+
+.expiredActions .adminPrimaryButton,
+.expiredActions .adminGhostButton {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 12px;
 }
 
 .pricingStrip {
@@ -1974,7 +2186,7 @@ canvas {
   }
 
   .expiredMemberGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .expiredLayout {
@@ -1984,6 +2196,11 @@ canvas {
   .expiredFilters {
     position: static;
   }
+
+  .expiredMember {
+    grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(92px, 0.7fr));
+  }
+
 }
 
 @media (max-width: 760px) {
@@ -2010,6 +2227,24 @@ canvas {
   .expiredMemberGrid,
   .pricingStrip {
     grid-template-columns: 1fr;
+  }
+
+  .expiredMember {
+    grid-template-columns: 1fr;
+    gap: 11px;
+    align-items: stretch;
+    padding: 14px;
+  }
+
+  .expiredMemberMeta {
+    grid-template-columns: 92px minmax(0, 1fr);
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 9px;
+  }
+
+  .expiredActions {
+    grid-template-columns: 1fr 1fr;
   }
 
   .dateRangeField {
