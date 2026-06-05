@@ -299,6 +299,9 @@ export function AdminPanel({
   const [expiredPaymentFilter, setExpiredPaymentFilter] = useState("all");
   const [savingAction, setSavingAction] = useState("");
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [passwordPanelOpen, setPasswordPanelOpen] = useState(false);
+  const [passwordStatus, setPasswordStatus] = useState("");
+  const [passwordStatusType, setPasswordStatusType] = useState("");
 
   const now = useMemo(() => new Date(), []);
   const previewEndDate = getMembershipEndDate(form.membershipStartDate, form.plan, plans);
@@ -652,6 +655,40 @@ export function AdminPanel({
     });
   }
 
+  async function changePassword(event) {
+    event.preventDefault();
+    setPasswordStatus("");
+    setPasswordStatusType("");
+
+    const passwordForm = event.currentTarget;
+    const formData = new FormData(passwordForm);
+    const payload = {
+      currentPassword: formData.get("currentPassword"),
+      newPassword: formData.get("newPassword"),
+      confirmPassword: formData.get("confirmPassword")
+    };
+
+    try {
+      setSavingAction("password");
+
+      const response = await fetch("/api/admin/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      await parseApiResponse(response);
+
+      passwordForm.reset();
+      setPasswordStatus("Şifre güncellendi.");
+      setPasswordStatusType("success");
+    } catch (error) {
+      setPasswordStatus(error.message);
+      setPasswordStatusType("error");
+    } finally {
+      setSavingAction("");
+    }
+  }
+
   return (
     <main className="adminShell">
       <aside className="adminSidebar" aria-label="Admin menüsü">
@@ -697,6 +734,17 @@ export function AdminPanel({
             <button
               type="button"
               className="adminGhostButton"
+              onClick={() => {
+                setPasswordPanelOpen((value) => !value);
+                setPasswordStatus("");
+                setPasswordStatusType("");
+              }}
+            >
+              Şifre değiştir
+            </button>
+            <button
+              type="button"
+              className="adminGhostButton"
               disabled={notificationsEnabled}
               onClick={enableNotifications}
             >
@@ -707,6 +755,29 @@ export function AdminPanel({
             </a>
           </div>
         </header>
+
+        {passwordPanelOpen ? (
+          <section className="adminPasswordPanel" aria-label="Admin şifre değiştirme">
+            <form className="adminPasswordForm" onSubmit={changePassword}>
+              <label>
+                Eski şifre
+                <input name="currentPassword" type="password" autoComplete="current-password" required />
+              </label>
+              <label>
+                Yeni şifre
+                <input name="newPassword" type="password" autoComplete="new-password" minLength="8" required />
+              </label>
+              <label>
+                Yeni şifre tekrar
+                <input name="confirmPassword" type="password" autoComplete="new-password" minLength="8" required />
+              </label>
+              <button type="submit" className="adminPrimaryButton" disabled={savingAction === "password"}>
+                {savingAction === "password" ? "Kaydediliyor" : "Kaydet"}
+              </button>
+              {passwordStatus ? <p className={passwordStatusType}>{passwordStatus}</p> : null}
+            </form>
+          </section>
+        ) : null}
 
         {activeView === adminViews.OVERVIEW ? (
           <>
