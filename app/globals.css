@@ -1341,6 +1341,59 @@ canvas {
   gap: 10px;
 }
 
+.adminPasswordPanel {
+  border: 1px solid rgba(184, 241, 61, 0.2);
+  border-radius: var(--radius);
+  background: rgba(20, 26, 32, 0.74);
+  padding: 14px;
+}
+
+.adminPasswordForm {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+.adminPasswordForm label {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.adminPasswordForm input {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #0d1116;
+  color: var(--text);
+  padding: 0 10px;
+  outline: none;
+}
+
+.adminPasswordForm input:focus {
+  border-color: var(--green);
+}
+
+.adminPasswordForm p {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.adminPasswordForm p.success {
+  color: var(--green);
+}
+
+.adminPasswordForm p.error {
+  color: var(--coral);
+}
+
 .adminEyebrow {
   margin: 0 0 8px;
 }
@@ -1950,6 +2003,7 @@ canvas {
   }
 
   .adminStatsGrid,
+  .adminPasswordForm,
   .memberForm,
   .memberFilters,
   .expiredLayout,
