@@ -6,6 +6,7 @@ import {
   adminSessionMaxAgeMs,
   createAdminLoginPath
 } from "@/src/features/admin/auth/adminSession.contract";
+import { hasSupabaseConfig, supabaseConfig } from "@/src/utils/supabase/config";
 
 const publicAdminPaths = new Set(["/admin/login", "/api/admin/login", "/api/admin/auth"]);
 
@@ -38,10 +39,7 @@ export async function updateSession(request) {
 
   const isPublicAdminPath = publicAdminPaths.has(path);
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-  if (!supabaseUrl || !supabasePublishableKey) {
+  if (!hasSupabaseConfig()) {
     if (isPublicAdminPath) {
       return NextResponse.next();
     }
@@ -56,8 +54,8 @@ export async function updateSession(request) {
   });
 
   const supabase = createServerClient(
-    supabaseUrl,
-    supabasePublishableKey,
+    supabaseConfig.url,
+    supabaseConfig.publishableKey,
     {
       cookies: {
         getAll() {
