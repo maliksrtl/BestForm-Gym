@@ -14,7 +14,7 @@ export function SiteFooter() {
         </a>{" "}
         and{" "}
         <a href="https://github.com/maliksrtl" target="_blank" rel="noreferrer">
-          Malik Sertel
+          Malik Can Sertel
         </a>
       </p>
     </footer>
