@@ -20,6 +20,11 @@ const paymentStatuses = Object.freeze({
   UNPAID: "unpaid"
 });
 
+const profileImageRules = Object.freeze({
+  acceptedTypes: ["image/jpeg", "image/png", "image/webp"],
+  maxSizeBytes: 2 * 1024 * 1024
+});
+
 const adminViews = Object.freeze({
   OVERVIEW: "overview",
   MEMBERS: "members",
@@ -135,6 +140,8 @@ function toClientMember(member) {
     membershipEndDate: member.membershipEndDate ?? member.membership_end_date ?? "",
     price: Number(member.price ?? member.price_amount ?? 0),
     paymentStatus: member.paymentStatus ?? member.payment_status ?? paymentStatuses.PAID,
+    profileImagePath: member.profileImagePath ?? member.profile_image_path ?? "",
+    profileImageUrl: member.profileImageUrl ?? member.profile_image_url ?? "",
     notes: member.notes ?? "",
     cancelled: member.status === memberStatuses.CANCELLED
   };
@@ -152,6 +159,8 @@ function getDefaultForm(plans = defaultPlanOptions) {
     membershipStartDate: startDate,
     price: defaultPlan.price,
     paymentStatus: paymentStatuses.PAID,
+    profileImagePath: "",
+    profileImageUrl: "",
     notes: ""
   };
 }
@@ -280,6 +289,43 @@ function getPricingPayload(plans) {
   );
 }
 
+function getInitials(fullName) {
+  return String(fullName || "BF")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toLocaleUpperCase("tr-TR"))
+    .join("") || "BF";
+}
+
+function validateProfileImage(file) {
+  if (!file) {
+    return "";
+  }
+
+  if (!profileImageRules.acceptedTypes.includes(file.type)) {
+    return "Sadece JPG, PNG veya WEBP profil resmi yüklenebilir.";
+  }
+
+  if (file.size > profileImageRules.maxSizeBytes) {
+    return "Profil resmi en fazla 2 MB olabilir.";
+  }
+
+  return "";
+}
+
+async function uploadProfileImage(file) {
+  const formData = new FormData();
+  formData.append("profileImage", file);
+
+  const response = await fetch("/api/admin/member-photo", {
+    method: "POST",
+    body: formData
+  });
+
+  return parseApiResponse(response);
+}
+
 export function AdminPanel({
   initialView = adminViews.OVERVIEW,
   initialMembers: initialMemberRecords = mockMembers,
@@ -302,6 +348,13 @@ export function AdminPanel({
   const [passwordPanelOpen, setPasswordPanelOpen] = useState(false);
   const [passwordStatus, setPasswordStatus] = useState("");
   const [passwordStatusType, setPasswordStatusType] = useState("");
+  const [profileImageFile, setProfileImageFile] = useState(null);
+  const [profileImagePreview, setProfileImagePreview] = useState("");
+  const [profileImageError, setProfileImageError] = useState("");
+  const [profileImageRemoveRequested, setProfileImageRemoveRequested] = useState(false);
+  const [memberFormStatus, setMemberFormStatus] = useState("");
+  const [memberFormStatusType, setMemberFormStatusType] = useState("");
+  const [previewedProfileImage, setPreviewedProfileImage] = useState(null);
 
   const now = useMemo(() => new Date(), []);
   const previewEndDate = getMembershipEndDate(form.membershipStartDate, form.plan, plans);
@@ -318,6 +371,17 @@ export function AdminPanel({
 
     return () => window.removeEventListener("hashchange", syncHashView);
   }, [initialView]);
+
+  useEffect(() => {
+    if (!profileImageFile) {
+      return undefined;
+    }
+
+    const objectUrl = URL.createObjectURL(profileImageFile);
+    setProfileImagePreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [profileImageFile]);
 
   const enrichedMembers = useMemo(
     () =>
@@ -469,6 +533,44 @@ export function AdminPanel({
   function resetForm() {
     setEditingMemberId(null);
     setForm(getDefaultForm(plans));
+    setProfileImageFile(null);
+    setProfileImagePreview("");
+    setProfileImageError("");
+    setProfileImageRemoveRequested(false);
+    setMemberFormStatus("");
+    setMemberFormStatusType("");
+  }
+
+  function handleProfileImageFile(file) {
+    if (!file) {
+      return;
+    }
+
+    setMemberFormStatus("");
+    setMemberFormStatusType("");
+
+    const error = validateProfileImage(file);
+
+    if (error) {
+      setProfileImageFile(null);
+      setProfileImagePreview("");
+      setProfileImageError(error);
+      return;
+    }
+
+    setProfileImageError("");
+    setProfileImageFile(file);
+    setProfileImageRemoveRequested(false);
+  }
+
+  function clearProfileImageSelection() {
+    setProfileImageFile(null);
+    setProfileImagePreview("");
+    setProfileImageError("");
+    setMemberFormStatus("");
+    setMemberFormStatusType("");
+    setProfileImageRemoveRequested(Boolean(form.profileImageUrl || form.profileImagePath));
+    setForm((current) => ({ ...current, profileImagePath: "", profileImageUrl: "" }));
   }
 
   function changeView(viewId) {
@@ -481,8 +583,11 @@ export function AdminPanel({
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setMemberFormStatus("Kaydediliyor...");
+    setMemberFormStatusType("info");
+    setProfileImageError("");
 
-    const payload = {
+    let payload = {
       ...form,
       price: Number(form.price),
       membershipEndDate: getMembershipEndDate(form.membershipStartDate, form.plan, plans)
@@ -490,6 +595,21 @@ export function AdminPanel({
 
     try {
       setSavingAction("member");
+
+      if (profileImageFile) {
+        const uploadedImage = await uploadProfileImage(profileImageFile);
+        payload = {
+          ...payload,
+          profileImagePath: uploadedImage.path,
+          profileImageUrl: uploadedImage.url
+        };
+      } else if (profileImageRemoveRequested) {
+        payload = {
+          ...payload,
+          profileImagePath: "",
+          profileImageUrl: ""
+        };
+      }
 
       const response = await fetch(editingMemberId ? `/api/admin/members/${editingMemberId}` : "/api/admin/members", {
         method: editingMemberId ? "PATCH" : "POST",
@@ -507,9 +627,17 @@ export function AdminPanel({
         setMembers((current) => [savedMember, ...current]);
       }
 
+      const successMessage = editingMemberId ? "Üye güncellendi." : "Üye kaydedildi.";
       resetForm();
+      setMemberFormStatus(successMessage);
+      setMemberFormStatusType("success");
     } catch (error) {
-      window.alert(error.message);
+      if (profileImageFile) {
+        setProfileImageError(error.message);
+      }
+
+      setMemberFormStatus(error.message);
+      setMemberFormStatusType("error");
     } finally {
       setSavingAction("");
     }
@@ -527,8 +655,16 @@ export function AdminPanel({
       membershipStartDate: member.membershipStartDate,
       price: member.status === memberStatuses.EXPIRED ? currentPlanPrice : member.price,
       paymentStatus: member.paymentStatus,
+      profileImagePath: member.profileImagePath,
+      profileImageUrl: member.profileImageUrl,
       notes: member.notes
     });
+    setProfileImageFile(null);
+    setProfileImagePreview(member.profileImageUrl || "");
+    setProfileImageError("");
+    setProfileImageRemoveRequested(false);
+    setMemberFormStatus("");
+    setMemberFormStatusType("");
   }
 
   function renewMember(member) {
@@ -545,8 +681,16 @@ export function AdminPanel({
       membershipStartDate: startDate,
       price: plan.price,
       paymentStatus: paymentStatuses.PAID,
+      profileImagePath: member.profileImagePath,
+      profileImageUrl: member.profileImageUrl,
       notes: member.notes
     });
+    setProfileImageFile(null);
+    setProfileImagePreview(member.profileImageUrl || "");
+    setProfileImageError("");
+    setProfileImageRemoveRequested(false);
+    setMemberFormStatus("");
+    setMemberFormStatusType("");
   }
 
   async function togglePayment(memberId) {
@@ -689,8 +833,37 @@ export function AdminPanel({
     }
   }
 
+  function openProfileImage(member) {
+    if (!member.profileImageUrl) {
+      return;
+    }
+
+    setPreviewedProfileImage({
+      alt: `${member.fullName} profil resmi`,
+      name: member.fullName,
+      url: member.profileImageUrl
+    });
+  }
+
   return (
     <main className="adminShell">
+      {previewedProfileImage ? (
+        <div className="profileImageOverlay" role="presentation" onMouseDown={() => setPreviewedProfileImage(null)}>
+          <section
+            className="profileImageModal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${previewedProfileImage.name} profil resmi`}
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="modalCloseButton" onClick={() => setPreviewedProfileImage(null)}>
+              ×
+            </button>
+            <img src={previewedProfileImage.url} alt={previewedProfileImage.alt} />
+            <strong>{previewedProfileImage.name}</strong>
+          </section>
+        </div>
+      ) : null}
       <aside className="adminSidebar" aria-label="Admin menüsü">
         <a className="adminBrand" href="/">
           <span>BF</span>
@@ -897,8 +1070,24 @@ export function AdminPanel({
                   {filteredMembers.map((member) => (
                     <tr key={member.id} className={member.status === memberStatuses.EXPIRED ? "isMuted" : ""}>
                       <td data-label="Üye">
-                        <strong>{member.fullName}</strong>
-                        <span>{member.phone}</span>
+                        <div className="memberIdentity">
+                          <button
+                            type="button"
+                            className={`profileAvatarButton ${member.profileImageUrl ? "hasImage" : ""}`}
+                            onClick={() => openProfileImage(member)}
+                            aria-label={`${member.fullName} profil resmini aç`}
+                          >
+                            {member.profileImageUrl ? (
+                              <img src={member.profileImageUrl} alt="" />
+                            ) : (
+                              <span>{getInitials(member.fullName)}</span>
+                            )}
+                          </button>
+                          <div>
+                            <strong>{member.fullName}</strong>
+                            <span>{member.phone}</span>
+                          </div>
+                        </div>
                       </td>
                       <td data-label="Üyelik">
                         <strong>{findPlan(member.plan, plans).label}</strong>
@@ -991,6 +1180,42 @@ export function AdminPanel({
                 placeholder="uye@example.com"
               />
             </label>
+            <label
+              className="profileImageField formWide"
+              onDragOver={(event) => event.preventDefault()}
+              onDrop={(event) => {
+                event.preventDefault();
+                handleProfileImageFile(event.dataTransfer.files?.[0]);
+              }}
+            >
+              Profil Resmi Ekle
+              <input
+                id="member-profile-image"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={(event) => {
+                  handleProfileImageFile(event.target.files?.[0]);
+                  event.target.value = "";
+                }}
+              />
+              <span className="profileImageDropzone">
+                <strong>Resim seç</strong>
+                <small>Klasörden seç veya buraya sürükle</small>
+              </span>
+              <span className="profileImageHint">JPG, PNG veya WEBP. En fazla 2 MB. Tek resim yüklenir.</span>
+              {profileImagePreview ? (
+                <div className="profileImagePreview">
+                  <img src={profileImagePreview} alt="Seçilen profil resmi ön izlemesi" />
+                  <button type="button" className="adminGhostButton" onClick={clearProfileImageSelection}>
+                    {form.profileImageUrl || form.profileImagePath ? "Resmi kaldır" : "Seçimi kaldır"}
+                  </button>
+                </div>
+              ) : null}
+              {profileImageRemoveRequested ? (
+                <small className="profileImageHint">Mevcut profil resmi kaydedince kaldırılacak.</small>
+              ) : null}
+              {profileImageError ? <small className="profileImageError">{profileImageError}</small> : null}
+            </label>
             <label>
               Üyelik tipi
               <select value={form.plan} onChange={(event) => updateForm("plan", event.target.value)}>
@@ -1047,12 +1272,17 @@ export function AdminPanel({
             </label>
             <div className="formActions">
               <button type="submit" className="adminPrimaryButton" disabled={savingAction === "member"}>
-                {editingMemberId ? "Güncelle" : "Üye ekle"}
+                {savingAction === "member" ? "Kaydediliyor..." : editingMemberId ? "Güncelle" : "Üye ekle"}
               </button>
               {editingMemberId ? (
                 <button type="button" className="adminGhostButton" onClick={resetForm}>
                   Vazgeç
                 </button>
+              ) : null}
+              {memberFormStatus ? (
+                <p className={`memberFormStatus ${memberFormStatusType}`} aria-live="polite">
+                  {memberFormStatus}
+                </p>
               ) : null}
             </div>
           </form>
@@ -1109,14 +1339,42 @@ export function AdminPanel({
               <div className="expiredMemberGrid">
                 {filteredExpiredMembers.map((member) => (
                   <article className="expiredMember" key={member.id}>
-                    <div>
-                      <strong>{member.fullName}</strong>
-                      <span>{member.phone}</span>
+                    <div className="expiredMemberPerson">
+                      <div className="memberIdentity">
+                        <button
+                          type="button"
+                          className={`profileAvatarButton ${member.profileImageUrl ? "hasImage" : ""}`}
+                          onClick={() => openProfileImage(member)}
+                          aria-label={`${member.fullName} profil resmini aç`}
+                        >
+                          {member.profileImageUrl ? (
+                            <img src={member.profileImageUrl} alt="" />
+                          ) : (
+                            <span>{getInitials(member.fullName)}</span>
+                          )}
+                        </button>
+                        <div>
+                          <strong>{member.fullName}</strong>
+                          <span>{member.phone}</span>
+                        </div>
+                      </div>
                     </div>
-                    <p>
-                      Üyelik {formatDate(member.membershipEndDate)} tarihinde bitti.{" "}
-                      {daysBetween(member.membershipEndDate, now)} gündür pasif.
-                    </p>
+                    <div className="expiredMemberMeta">
+                      <span>Üyelik</span>
+                      <strong>{findPlan(member.plan, plans).label}</strong>
+                    </div>
+                    <div className="expiredMemberMeta">
+                      <span>Bitiş</span>
+                      <strong>{formatDate(member.membershipEndDate)}</strong>
+                    </div>
+                    <div className="expiredMemberMeta">
+                      <span>Pasif süre</span>
+                      <strong>{daysBetween(member.membershipEndDate, now)} gün</strong>
+                    </div>
+                    <div className="expiredMemberMeta">
+                      <span>Ödeme</span>
+                      <strong>{member.paymentStatus === paymentStatuses.PAID ? "Ödendi" : "Ödenmedi"}</strong>
+                    </div>
                     <div className="expiredActions">
                       <button type="button" className="adminPrimaryButton" onClick={() => renewMember(member)}>
                         Yenile
