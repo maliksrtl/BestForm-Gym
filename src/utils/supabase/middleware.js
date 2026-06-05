@@ -36,10 +36,16 @@ export async function updateSession(request) {
     return NextResponse.next();
   }
 
+  const isPublicAdminPath = publicAdminPaths.has(path);
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
   if (!supabaseUrl || !supabasePublishableKey) {
+    if (isPublicAdminPath) {
+      return NextResponse.next();
+    }
+
     return redirectToLogin(request, "config");
   }
 
@@ -79,8 +85,6 @@ export async function updateSession(request) {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-
-  const isPublicAdminPath = publicAdminPaths.has(path);
 
   if (!isPublicAdminPath) {
     if (!user) {
