@@ -3,9 +3,9 @@ export const siteConfig = {
   shortName: "BESTFORM GYM",
   siteUrl: "https://best-form-gym.vercel.app",
   instagramUrl: "https://www.instagram.com/bestformgym/",
-  phoneDisplay: "(0322) 227 13 90",
-  phoneHref: "tel:+903222271390",
-  whatsappUrl: "https://wa.me/903222271390",
+  phoneDisplay: "(0533) 394 52 19",
+  phoneHref: "tel:+905333945219",
+  whatsappUrl: "https://wa.me/905333945219",
   mapUrl:
     "https://www.google.com/maps/search/?api=1&query=Bestform%20Gym%20%26%20Health%20Center%20S%C3%BCmer%2069061.%20Sk.%20Seyhan%20Adana",
   mapEmbedUrl:
