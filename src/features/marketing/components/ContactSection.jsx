@@ -69,8 +69,12 @@ export function ContactSection({ leadSubmitted, onSubmit }) {
               <option>Cumartesi</option>
             </select>
           </label>
-          <button className="primaryButton" type="submit">
-            Randevu talebi gönder
+               <button 
+                className="primaryButton" 
+                type="submit"
+                onClick={() => window.open(`${siteConfig.whatsappUrl}?text=Merhaba,%20randevu%20almak%20istiyorum.`, '_blank')}>
+
+               Randevu talebi gönder
           </button>
           {leadSubmitted && <p className="successMessage">Talebin alındı. Ekip en kısa sürede dönüş yapacak.</p>}
         </form>
