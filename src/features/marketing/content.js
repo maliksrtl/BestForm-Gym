@@ -124,16 +124,21 @@ export const hours = [
   ["Çarşamba", "09:00 - 23:00"],
   ["Perşembe", "09:00 - 23:00"],
   ["Cuma", "09:00 - 23:00"],
-  ["Cumartesi", "09:00 - 21:00"],
+  ["Cumartesi", "09:00 - 20:00"],
   ["Pazar", "Kapalı"]
 ];
 
 export const reviews = [
   {
-    name: "Cafer G.",
+    name: "Malik Can S.",
     result: "Motivasyon ve ortam",
     text:
-      "Yeterli ekipman, kolay ulaşım, seviyeli ortam ve İsmail Hoca'nın motive eden ilgisi BestForm Gym'i öne çıkarıyor."
+      "Yeterli ekipman, kolay ulaşım, seviyeli ortam ve İsmail Hoca'nın motive eden ilgisi BestForm Gym'i öne çıkarıyor"
+  },
+  {
+    name: "Burak T.",
+    result: "Profesyonel kadro ve pozitif enerji",
+    text: "Antrenörlerin yakından ilgisi ve salondaki samimi ortam sayesinde antrenmanlar çok verimli geçiyor. Hem yeni başlayanlar hem de profesyoneller için bölgedeki en iyi alternatif."
   },
   {
     name: "Ömer Ö.",
