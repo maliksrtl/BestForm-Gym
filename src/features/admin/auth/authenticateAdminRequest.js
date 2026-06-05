@@ -43,6 +43,10 @@ export async function authenticateAdminRequest(request) {
     return errorResponse(request, "missing", json);
   }
 
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    return errorResponse(request, "config", json);
+  }
+
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 

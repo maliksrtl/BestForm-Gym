@@ -2,10 +2,10 @@ export const adminSessionContract = Object.freeze({
   cookieName: "bestform_admin_login_at",
   maxAgeDays: 20,
   maxAgeSeconds: 60 * 60 * 24 * 20,
-  loginModalPath: "/?adminLogin=1",
+  loginModalPath: "/admin/login",
   adminHomePath: "/admin",
-  loginRedirect: "/?adminLogin=1",
-  logoutRedirect: "/?adminLogin=1",
+  loginRedirect: "/admin/login",
+  logoutRedirect: "/admin/login",
   protectedRoutePrefix: "/admin"
 });
 
@@ -16,7 +16,7 @@ export function createAdminLoginPath(error) {
     return adminSessionContract.loginModalPath;
   }
 
-  return `${adminSessionContract.loginModalPath}&error=${encodeURIComponent(error)}`;
+  return `${adminSessionContract.loginModalPath}?error=${encodeURIComponent(error)}`;
 }
 
 export function getAdminSessionCookieOptions() {

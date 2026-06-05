@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 
 const loginErrorMessages = {
-  invalid: "E-posta veya sifre hatali.",
-  missing: "E-posta ve sifre zorunlu.",
-  unauthorized: "Bu kullanici admin paneline yetkili degil.",
-  config: "Supabase baglanti ayarlari eksik.",
-  "login-required": "Devam etmek icin admin girisi yapmalisin.",
-  "session-expired": "Guvenlik icin 20 gun doldu. Lutfen tekrar giris yap.",
-  default: "Giris sirasinda hata olustu."
+  invalid: "E-posta veya şifre hatalı.",
+  missing: "E-posta ve şifre zorunlu.",
+  unauthorized: "Bu kullanıcı admin paneline yetkili değil.",
+  config: "Supabase bağlantı ayarları eksik.",
+  "missing-config": "Supabase bağlantı ayarları eksik.",
+  "login-required": "Devam etmek için admin girişi yapmalısın.",
+  "session-expired": "Güvenlik için oturum süresi doldu. Lütfen tekrar giriş yap.",
+  default: "Giriş sırasında hata oluştu."
 };
 
 export function AdminLoginModal({ errorCode = "", open, onClose }) {
@@ -86,28 +87,28 @@ export function AdminLoginModal({ errorCode = "", open, onClose }) {
         onMouseDown={(event) => event.stopPropagation()}
       >
         <button className="modalCloseButton" type="button" aria-label="Kapat" onClick={onClose}>
-          x
+          ×
         </button>
-        <p className="adminEyebrow">Admin girisi</p>
-        <h2 id="admin-login-title">Yonetim paneli</h2>
+        <p className="adminEyebrow">Admin girişi</p>
+        <h2 id="admin-login-title">Yönetim paneli</h2>
         <form className="adminModalForm" onSubmit={submitLogin}>
           <label>
             E-posta
             <input name="email" type="email" required placeholder="admin@example.com" autoComplete="email" />
           </label>
           <label>
-            Sifre
+            Şifre
             <input
               name="password"
               type="password"
               required
-              placeholder="Sifren"
+              placeholder="Şifren"
               autoComplete="current-password"
             />
           </label>
           {error ? <p className="adminModalError">{error}</p> : null}
           <button type="submit" disabled={submitting}>
-            {submitting ? "Kontrol ediliyor" : "Panele giris yap"}
+            {submitting ? "Kontrol ediliyor" : "Panele giriş yap"}
           </button>
         </form>
       </section>

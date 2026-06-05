@@ -12,7 +12,10 @@ export function SiteFooter() {
         <a href="https://yusuf-sertel-portfolio.vercel.app/tr" target="_blank" rel="noreferrer">
           Yusuf Sertel
         </a>{" "}
-        and Malik Sertel
+        and{" "}
+        <a href="https://github.com/maliksrtl" target="_blank" rel="noreferrer">
+          Malik Sertel
+        </a>
       </p>
     </footer>
   );

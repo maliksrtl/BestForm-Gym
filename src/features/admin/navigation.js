@@ -1,5 +1,5 @@
 export const adminRoutes = Object.freeze({
-  login: "/?adminLogin=1",
+  login: "/admin/login",
   dashboard: "/admin",
   members: "/admin#members",
   expired: "/admin#expired",
