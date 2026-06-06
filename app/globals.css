@@ -512,8 +512,7 @@ canvas {
 }
 
 .servicePanel h3,
-.infoCard h3,
-.coachCard h3 {
+.infoCard h3 {
   margin: 10px 0 10px;
   font-size: clamp(24px, 3vw, 36px);
   line-height: 1.05;
@@ -521,8 +520,7 @@ canvas {
 
 .servicePanel p,
 .infoCard p,
-.reviewCard p,
-.coachCard p {
+.reviewCard p {
   margin: 0;
   color: var(--muted);
 }
@@ -729,6 +727,7 @@ canvas {
 .coachSection {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(380px, 560px);
+  align-items: center;
   min-height: 650px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -736,7 +735,9 @@ canvas {
 }
 
 .coachVisual {
-  min-height: 480px;
+  width: 100%;
+  height: 650px;
+  align-self: center;
   background-position: center;
   background-size: cover;
 }
@@ -746,31 +747,98 @@ canvas {
   padding: clamp(32px, 6vw, 72px);
 }
 
-.coachCard {
+.coachAccordion {
   display: grid;
-  grid-template-columns: 68px 1fr;
-  gap: 16px;
-  align-items: center;
+  gap: 10px;
   margin-top: 28px;
+}
+
+.coachItem {
+  position: relative;
   border: 1px solid rgba(184, 241, 61, 0.35);
   border-radius: var(--radius);
   background: rgba(184, 241, 61, 0.08);
-  padding: 18px;
+  overflow: hidden;
 }
 
-.coachBadge {
+.coachItemAlt {
+  border-color: rgba(103, 220, 232, 0.34);
+  background: rgba(103, 220, 232, 0.08);
+}
+
+.coachItem summary {
+  min-height: 90px;
   display: grid;
-  width: 64px;
-  height: 64px;
+  grid-template-columns: minmax(0, 1fr) 28px;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px 14px 92px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.coachItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.coachItem summary::after {
+  content: "+";
+  display: grid;
+  width: 28px;
+  height: 28px;
   place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 50%;
-  background: var(--green);
-  color: var(--ink);
+  color: var(--green);
+  font-size: 18px;
   font-weight: 900;
 }
 
-.coachCard h3 {
-  font-size: 24px;
+.coachItem[open] summary::after {
+  content: "-";
+}
+
+.coachPhoto {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  width: 62px;
+  height: 62px;
+  border: 2px solid rgba(184, 241, 61, 0.5);
+  border-radius: 50%;
+  background: var(--bg-soft);
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.coachItemAlt .coachPhoto {
+  border-color: rgba(103, 220, 232, 0.55);
+}
+
+.coachItem strong {
+  display: block;
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.coachItem small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.coachItem p {
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 0 16px 16px 92px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .hoursSection {
@@ -1080,9 +1148,12 @@ canvas {
   }
 
   .photoTile,
-  .photoTile:first-child,
-  .coachVisual {
+  .photoTile:first-child {
     min-height: 390px;
+  }
+
+  .coachVisual {
+    height: 390px;
   }
 
   .coachContent,
@@ -1153,8 +1224,8 @@ canvas {
     grid-template-columns: 1fr;
   }
 
-  .coachCard {
-    grid-template-columns: 1fr;
+  .coachItem p {
+    padding-left: 16px;
   }
 
   .footer {
@@ -1180,9 +1251,12 @@ canvas {
   }
 
   .photoTile,
-  .photoTile:first-child,
-  .coachVisual {
+  .photoTile:first-child {
     min-height: 300px;
+  }
+
+  .coachVisual {
+    height: 300px;
   }
 }
 

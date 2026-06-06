@@ -21,19 +21,16 @@ export const profile = {
 
 export const gallery = [
   {
-    title: "Adana Seyhan'da güçlü antrenman alanı",
-    image:
-      "https://lh5.googleusercontent.com/p/AF1QipNyXj6v5rEyGgor3JvdIwfEZmZqcY9KmzmwpsbK=w1200-h900-k-no"
+    title: "Salon atmosferi",
+    image: "/images/instagram/bestformgym-latest-3.jpg"
   },
   {
-    title: "Ağırlık ve makine bölümü",
-    image:
-      "https://lh5.googleusercontent.com/p/AF1QipP4tzU-fw-J7R5EImsihdJPYaOnZ2iTfiYzkVgg=w1200-h900-k-no"
+    title: "Son gönderilerden ağırlık ve makine alanı",
+    image: "/images/instagram/bestformgym-latest-2.jpg"
   },
   {
-    title: "Sümer Mahallesi'nde düzenli salon ortamı",
-    image:
-      "https://lh5.googleusercontent.com/p/AF1QipPRswbgoWxXKtRLxdZnJUBwKM-Xr2of-lDXt4vI=w1200-h900-k-no"
+    title: "Bestform Gym güncel üyelik ve salon görünümü",
+    image: "/images/instagram/bestformgym-latest-1.jpg"
   }
 ];
 
