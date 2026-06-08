@@ -41,7 +41,7 @@ export const gallery = [
     image: "/images/bestform-gallery/leg-machine.jpeg"
   },
   {
-    title: "Kırmızı ekipman sırası",
+    title: "Ekipmanlar",
     image: "/images/bestform-gallery/red-plate-machines.jpeg"
   },
   {
