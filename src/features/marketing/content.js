@@ -21,39 +21,39 @@ export const profile = {
 
 export const gallery = [
   {
-    title: "BESTFORM tabela ve salon girisi",
+    title: "BESTFORM",
     image: "/images/bestform-gallery/bestform-sign.jpeg"
   },
   {
-    title: "Makine ve agirlik alani",
+    title: "Makine ve ağırlık alanı",
     image: "/images/bestform-gallery/gym-floor-machines.jpeg"
   },
   {
-    title: "Motivasyon duvari",
+    title: "Motivasyon alanları",
     image: "/images/bestform-gallery/motivation-wall.jpeg"
   },
   {
-    title: "Guc makineleri",
+    title: "Güç makineleri",
     image: "/images/bestform-gallery/strength-machines.jpeg"
   },
   {
-    title: "Bacak calisma alani",
+    title: "Bacak çalışma makineleri",
     image: "/images/bestform-gallery/leg-machine.jpeg"
   },
   {
-    title: "Kirmizi ekipman sirasi",
+    title: "Kırmızı ekipman sırası",
     image: "/images/bestform-gallery/red-plate-machines.jpeg"
   },
   {
-    title: "Proforce makine bolumu",
+    title: "Makine bölümü",
     image: "/images/bestform-gallery/proforce-area.jpeg"
   },
   {
-    title: "Bestform duvar ve ekipman",
+    title: "Ekipman Alanı",
     image: "/images/bestform-gallery/bestform-wall-equipment.jpeg"
   },
   {
-    title: "Serbest agirlik ve makine hatti",
+    title: "Serbest ağırlık ve makine hattı",
     image: "/images/bestform-gallery/free-weight-row.jpeg"
   },
   {
@@ -61,7 +61,7 @@ export const gallery = [
     image: "/images/bestform-gallery/cable-machines.jpeg"
   },
   {
-    title: "Makine hatti ve yesil alan",
+    title: "Makine hattı",
     image: "/images/bestform-gallery/machine-line-turf.jpeg"
   }
 ];
