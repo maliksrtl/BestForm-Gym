@@ -21,16 +21,48 @@ export const profile = {
 
 export const gallery = [
   {
-    title: "Salon atmosferi",
-    image: "/images/instagram/bestformgym-latest-3.jpg"
+    title: "BESTFORM tabela ve salon girisi",
+    image: "/images/bestform-gallery/bestform-sign.jpeg"
   },
   {
-    title: "Son gönderilerden ağırlık ve makine alanı",
-    image: "/images/instagram/bestformgym-latest-2.jpg"
+    title: "Makine ve agirlik alani",
+    image: "/images/bestform-gallery/gym-floor-machines.jpeg"
   },
   {
-    title: "Bestform Gym güncel üyelik ve salon görünümü",
-    image: "/images/instagram/bestformgym-latest-1.jpg"
+    title: "Motivasyon duvari",
+    image: "/images/bestform-gallery/motivation-wall.jpeg"
+  },
+  {
+    title: "Guc makineleri",
+    image: "/images/bestform-gallery/strength-machines.jpeg"
+  },
+  {
+    title: "Bacak calisma alani",
+    image: "/images/bestform-gallery/leg-machine.jpeg"
+  },
+  {
+    title: "Kirmizi ekipman sirasi",
+    image: "/images/bestform-gallery/red-plate-machines.jpeg"
+  },
+  {
+    title: "Proforce makine bolumu",
+    image: "/images/bestform-gallery/proforce-area.jpeg"
+  },
+  {
+    title: "Bestform duvar ve ekipman",
+    image: "/images/bestform-gallery/bestform-wall-equipment.jpeg"
+  },
+  {
+    title: "Serbest agirlik ve makine hatti",
+    image: "/images/bestform-gallery/free-weight-row.jpeg"
+  },
+  {
+    title: "Cable ve fonksiyonel alan",
+    image: "/images/bestform-gallery/cable-machines.jpeg"
+  },
+  {
+    title: "Makine hatti ve yesil alan",
+    image: "/images/bestform-gallery/machine-line-turf.jpeg"
   }
 ];
 
