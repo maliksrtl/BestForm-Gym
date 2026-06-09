@@ -6,14 +6,8 @@ const nextConfig = {
     return [
       {
         source: "/:path*",
-        has: [{ type: "host", value: "www.bestformgym.com" }],
-        destination: "https://bestformgym.com/:path*",
-        permanent: true
-      },
-      {
-        source: "/:path*",
         has: [{ type: "host", value: "best-form-gym.vercel.app" }],
-        destination: "https://bestformgym.com/:path*",
+        destination: "https://www.bestformgym.com/:path*",
         permanent: true
       }
     ];

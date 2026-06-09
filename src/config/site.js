@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "BESTFORM GYM & Health Center",
   shortName: "BESTFORM GYM",
-  siteUrl: "https://bestformgym.com",
+  siteUrl: "https://www.bestformgym.com",
   instagramUrl: "https://www.instagram.com/bestformgym/",
   phoneDisplay: "(0533) 394 52 19",
   phoneE164: "+905333945219",
