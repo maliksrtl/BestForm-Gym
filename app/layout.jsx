@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 import { siteConfig } from "@/src/config/site";
 
 export const metadata = {
@@ -69,7 +71,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics gaId="G-MWELCTXJTZ" />
+      </body>
     </html>
   );
 }
