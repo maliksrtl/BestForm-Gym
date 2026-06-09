@@ -14,7 +14,8 @@ export function FacilitySection() {
 
       <div className="galleryGrid" aria-label="Bestform salon fotoğrafları">
         {gallery.map((item) => (
-          <figure key={item.title} className="photoTile" style={{ "--photo": `url("${item.image}")` }}>
+          <figure key={item.title} className="photoTile">
+            <img src={item.image} alt={`${item.title} - BestForm Gym Adana Seyhan spor salonu`} loading="lazy" />
             <figcaption>{item.title}</figcaption>
           </figure>
         ))}

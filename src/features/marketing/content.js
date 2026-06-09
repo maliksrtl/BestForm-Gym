@@ -4,6 +4,7 @@ export const navItems = [
   ["Hizmetler", "services"],
   ["Akış", "social"],
   ["Salon", "facility"],
+  ["Konum", "local-seo"],
   ["Ekip", "coach"],
   ["Saatler", "hours"],
   ["Yorumlar", "reviews"],
@@ -115,6 +116,34 @@ export const proofPoints = [
   }
 ];
 
+export const localSeoHighlights = [
+  {
+    title: "Adana ve Seyhan aramaları için net konum",
+    text:
+      "BestForm Gym, Sümer Mahallesi 69061. Sokak adresiyle Seyhan içinde net tarif edilebilir bir noktada yer alır. Barajyolu çevresinden gelenler için günlük rutine eklemesi kolaydır."
+  },
+  {
+    title: "Yakın çevreden hızlı ulaşım",
+    text:
+      "Sümer Mahallesi, Barajyolu, Gazipaşa, Reşatbey, Cemalpaşa ve Çukurova hattında spor salonu arayanlar için telefon, harita ve WhatsApp bağlantıları tek ekranda bulunur."
+  },
+  {
+    title: "Hizmet niyetine uygun içerik",
+    text:
+      "Fitness, body building, pilates ve personal training arayan ziyaretçiler hangi hizmetin kendilerine uygun olduğunu sayfa içinde hızlıca anlayabilir."
+  }
+];
+
+export const seoLandingLinks = [
+  { label: "Adana spor salonu", href: "/adana-spor-salonu" },
+  { label: "Seyhan spor salonu", href: "/seyhan-spor-salonu" },
+  { label: "Sümer Mahallesi spor salonu", href: "/sumer-mahallesi-spor-salonu" },
+  { label: "Barajyolu spor salonu", href: "/barajyolu-spor-salonu" },
+  { label: "Adana fitness salonu", href: "/adana-fitness-salonu" },
+  { label: "Adana pilates", href: "/adana-pilates" },
+  { label: "Adana personal training", href: "/adana-personal-training" }
+];
+
 export const hours = [
   ["Pazartesi", "09:00 - 23:00"],
   ["Salı", "09:00 - 23:00"],
@@ -186,6 +215,8 @@ export const faqs = [
   ]
 ];
 
+const absoluteImageUrls = gallery.map((item) => `${siteConfig.siteUrl}${item.image}`);
+
 export const businessSchema = {
   "@context": "https://schema.org",
   "@type": "ExerciseGym",
@@ -193,9 +224,10 @@ export const businessSchema = {
   name: siteConfig.name,
   alternateName: ["BestForm Gym", "Bestform Gym Adana", "BESTFORM GYM Seyhan"],
   description: siteConfig.metadata.description,
-  image: gallery.map((item) => item.image),
+  image: absoluteImageUrls,
+  logo: `${siteConfig.siteUrl}${siteConfig.logoPath}`,
   url: siteConfig.siteUrl,
-  telephone: "+90 322 227 13 90",
+  telephone: siteConfig.phoneE164,
   priceRange: "₺₺",
   hasMap: siteConfig.mapUrl,
   address: {
@@ -208,10 +240,24 @@ export const businessSchema = {
   },
   areaServed: [
     { "@type": "City", name: "Adana" },
-    { "@type": "AdministrativeArea", name: "Seyhan" },
-    { "@type": "Place", name: "Sümer Mahallesi" },
-    { "@type": "Place", name: "Barajyolu" }
+    ...siteConfig.nearbyAreas.map((area) => ({ "@type": "Place", name: area }))
   ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: siteConfig.phoneE164,
+    contactType: "customer service",
+    areaServed: "TR",
+    availableLanguage: ["tr"]
+  },
+  knowsAbout: ["Fitness", "Body Building", "Pilates", "Personal Training", "Adana spor salonu"],
+  makesOffer: services.map((service) => ({
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "Service",
+      name: service.label,
+      areaServed: "Adana"
+    }
+  })),
   sameAs: [siteConfig.instagramUrl],
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Monday", opens: "09:00", closes: "23:00" },
@@ -219,6 +265,6 @@ export const businessSchema = {
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Wednesday", opens: "09:00", closes: "23:00" },
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Thursday", opens: "09:00", closes: "23:00" },
     { "@type": "OpeningHoursSpecification", dayOfWeek: "Friday", opens: "09:00", closes: "23:00" },
-    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "21:00" }
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "20:00" }
   ]
 };

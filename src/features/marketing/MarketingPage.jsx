@@ -1,6 +1,5 @@
 "use client";
 
-import { businessSchema } from "@/src/features/marketing/content";
 import { AdminLoginModal } from "@/src/features/marketing/components/AdminLoginModal";
 import { CoachSection } from "@/src/features/marketing/components/CoachSection";
 import { ContactSection } from "@/src/features/marketing/components/ContactSection";
@@ -8,6 +7,7 @@ import { FacilitySection } from "@/src/features/marketing/components/FacilitySec
 import { FaqSection } from "@/src/features/marketing/components/FaqSection";
 import { HeroSection } from "@/src/features/marketing/components/HeroSection";
 import { HoursSection } from "@/src/features/marketing/components/HoursSection";
+import { LocalSeoSection } from "@/src/features/marketing/components/LocalSeoSection";
 import { ReviewsSection } from "@/src/features/marketing/components/ReviewsSection";
 import { ServicesSection } from "@/src/features/marketing/components/ServicesSection";
 import { SiteFooter } from "@/src/features/marketing/components/SiteFooter";
@@ -35,10 +35,6 @@ export function MarketingPage() {
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
-      />
       <SiteHeader
         menuOpen={menuOpen}
         onAdminOpen={openAdminLogin}
@@ -54,6 +50,7 @@ export function MarketingPage() {
       />
       <SocialSection />
       <FacilitySection />
+      <LocalSeoSection />
       <CoachSection />
       <HoursSection />
       <ReviewsSection />

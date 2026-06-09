@@ -678,19 +678,31 @@ canvas {
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background-image:
-    linear-gradient(0deg, rgba(7, 9, 12, 0.78), rgba(7, 9, 12, 0.08) 60%),
-    var(--photo);
-  background-position: center;
-  background-size: cover;
+  background: var(--panel);
 }
 
 .photoTile:first-child {
   min-height: 460px;
 }
 
+.photoTile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(7, 9, 12, 0.78), rgba(7, 9, 12, 0.08) 60%);
+}
+
+.photoTile img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: block;
+  object-fit: cover;
+}
+
 .photoTile figcaption {
   position: absolute;
+  z-index: 1;
   left: 18px;
   right: 18px;
   bottom: 18px;
@@ -703,6 +715,73 @@ canvas {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin-top: 16px;
+}
+
+.localSeoSection {
+  width: min(var(--max), calc(100% - 36px));
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+  padding: clamp(68px, 9vw, 112px) 0;
+}
+
+.localSeoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.localSeoCard {
+  min-height: 250px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(184, 241, 61, 0.1), transparent 44%),
+    var(--bg-soft);
+  padding: 24px;
+}
+
+.localSeoCard span,
+.seoHighlights span {
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.localSeoCard h3 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1.05;
+}
+
+.localSeoCard p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.areaLinkCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.areaLinkCloud a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(184, 241, 61, 0.32);
+  border-radius: 999px;
+  background: rgba(184, 241, 61, 0.07);
+  color: var(--green);
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .reviewGrid {
@@ -1052,8 +1131,9 @@ canvas {
 }
 
 .footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(260px, 1fr) minmax(220px, 0.7fr);
+  align-items: start;
   gap: 18px;
   padding: 28px max(18px, calc((100vw - var(--max)) / 2));
   border-top: 1px solid var(--line);
@@ -1070,6 +1150,22 @@ canvas {
   margin: 0;
 }
 
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footerLinks a {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.footerLinks a:hover {
+  color: var(--green);
+}
+
 .developerCredit {
   font-size: 12px;
   text-align: right;
@@ -1078,6 +1174,228 @@ canvas {
 .developerCredit a {
   color: var(--green);
   font-weight: 900;
+}
+
+.seoPage {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.seoHeader {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 16px max(18px, calc((100vw - var(--max)) / 2));
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 9, 12, 0.94);
+}
+
+.seoHeader nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.seoHeader nav a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--muted);
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.seoHeader nav a:hover {
+  color: var(--green);
+}
+
+.seoHero,
+.seoHighlights,
+.seoContentGrid,
+.seoAreaPanel,
+.seoFaq,
+.seoRelated {
+  width: min(var(--max), calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.seoHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 500px);
+  gap: clamp(24px, 5vw, 56px);
+  align-items: center;
+  padding: clamp(56px, 8vw, 104px) 0;
+}
+
+.seoHero > div,
+.seoContentBlock,
+.seoAreaPanel > div,
+.seoFaq .sectionIntro {
+  min-width: 0;
+}
+
+.seoHero h1 {
+  margin: 0;
+  max-width: 840px;
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 0.94;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.seoHero p:not(.sectionLabel) {
+  max-width: 780px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 19px;
+  overflow-wrap: anywhere;
+}
+
+.seoHeroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.seoHeroPhoto {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.seoHeroPhoto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+}
+
+.seoHeroPhoto figcaption {
+  padding: 14px 16px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.seoHighlights {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.seoHighlights article {
+  min-height: 120px;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 18px;
+}
+
+.seoHighlights strong {
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+.seoContentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: clamp(46px, 7vw, 82px) 0;
+}
+
+.seoContentBlock,
+.seoAreaPanel,
+.seoFaqItem {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+}
+
+.seoContentBlock {
+  padding: clamp(22px, 4vw, 32px);
+}
+
+.seoContentBlock h2,
+.seoAreaPanel h2,
+.seoFaq h2 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.seoContentBlock p,
+.seoAreaPanel p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.seoContentBlock ul {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seoContentBlock li {
+  border-left: 2px solid var(--green);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.seoAreaPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.seoFaq {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
+  gap: 24px;
+  padding: clamp(46px, 7vw, 82px) 0;
+}
+
+.seoFaqItem {
+  padding: 0 18px;
+}
+
+.seoFaqItem summary {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 900;
+}
+
+.seoFaqItem p {
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 14px 0 18px;
+  color: var(--muted);
+}
+
+.seoRelated {
+  border-top: 1px solid var(--line);
+  padding: 32px 0 54px;
 }
 
 @media (max-width: 1080px) {
@@ -1133,17 +1451,23 @@ canvas {
   .socialSection,
   .coachSection,
   .contactSection,
-  .faqSection {
+  .faqSection,
+  .seoHero,
+  .seoContentGrid,
+  .seoAreaPanel,
+  .seoFaq {
     grid-template-columns: 1fr;
   }
 
-  .signalGrid {
+  .signalGrid,
+  .localSeoGrid {
     grid-template-columns: 1fr;
   }
 
   .galleryGrid,
   .proofGrid,
-  .reviewGrid {
+  .reviewGrid,
+  .seoHighlights {
     grid-template-columns: 1fr;
   }
 
@@ -1159,6 +1483,16 @@ canvas {
   .coachContent,
   .contactSection {
     padding-inline: 18px;
+  }
+
+  .seoHeader {
+    grid-template-columns: 1fr auto;
+  }
+
+  .seoHeader nav {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    overflow-x: auto;
   }
 }
 
@@ -1229,11 +1563,38 @@ canvas {
   }
 
   .footer {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .developerCredit {
     text-align: left;
+  }
+
+  .seoHeroActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .seoHero h1 {
+    font-size: clamp(34px, 11vw, 48px);
+    line-height: 0.98;
+  }
+
+  .seoHero p:not(.sectionLabel) {
+    font-size: 17px;
+  }
+
+  .seoHero,
+  .seoHighlights,
+  .seoContentGrid,
+  .seoAreaPanel,
+  .seoFaq,
+  .seoRelated {
+    width: min(var(--max), calc(100% - 32px));
+  }
+
+  .seoAreaPanel .primaryButton {
+    width: 100%;
   }
 }
 

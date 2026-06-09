@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">BESTFORM GYM logo</title>
+  <desc id="desc">BestForm Gym BF monogram logo</desc>
+  <rect width="512" height="512" rx="64" fill="#07090c"/>
+  <rect x="66" y="66" width="380" height="380" rx="18" fill="#10150f" stroke="#b8f13d" stroke-width="30"/>
+  <text x="256" y="305" fill="#b8f13d" font-family="Arial, Helvetica, sans-serif" font-size="146" font-weight="900" text-anchor="middle" letter-spacing="0">BF</text>
+  <text x="256" y="372" fill="#f5f0e8" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900" text-anchor="middle" letter-spacing="3">BESTFORM</text>
+</svg>

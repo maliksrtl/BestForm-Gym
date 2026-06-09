@@ -2,6 +2,22 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.bestformgym.com" }],
+        destination: "https://bestformgym.com/:path*",
+        permanent: true
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "best-form-gym.vercel.app" }],
+        destination: "https://bestformgym.com/:path*",
+        permanent: true
+      }
+    ];
+  },
   async headers() {
     return [
       {
